@@ -1,0 +1,6 @@
+@ThutonetOrganizationAPI_HostAddress = http://localhost:5000
+
+GET {{ThutonetOrganizationAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrganizationCore\OrganizationCore.csproj" />
+    <ProjectReference Include="..\OrganizationData\OrganizationData.csproj" />
+    <ProjectReference Include="..\OrganizationDTO\OrganizationDTO.csproj" />
+    <ProjectReference Include="..\OrganizationIInterface\OrganizationIInterface.csproj" />
+    <ProjectReference Include="..\OrganizationModels\OrganizationModels.csproj" />
+    <ProjectReference Include="..\OrganizationRepository\OrganizationRepository.csproj" />
+    <ProjectReference Include="..\OrganizationServices\OrganizationServices.csproj" />
+  </ItemGroup>
+
+</Project>

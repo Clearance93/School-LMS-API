@@ -1,0 +1,17 @@
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\bin\Debug\net8.0\OrganizationData.deps.json
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\bin\Debug\net8.0\OrganizationData.dll
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\bin\Debug\net8.0\OrganizationData.pdb
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\bin\Debug\net8.0\OrganizationModels.dll
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\bin\Debug\net8.0\OrganizationModels.pdb
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\OrganizationData.csproj.AssemblyReference.cache
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\OrganizationData.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\OrganizationData.AssemblyInfoInputs.cache
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\OrganizationData.AssemblyInfo.cs
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\OrganizationData.csproj.CoreCompileInputs.cache
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\Organiza.DDDEC52C.Up2Date
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\OrganizationData.dll
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\refint\OrganizationData.dll
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\OrganizationData.pdb
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\ref\OrganizationData.dll
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\bin\Debug\net8.0\OrganizationData.runtimeconfig.json
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationData\obj\Debug\net8.0\OrganizationData.genruntimeconfig.cache
