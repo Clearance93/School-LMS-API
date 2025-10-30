@@ -11,6 +11,16 @@ namespace OrganizationCore.UnitOfWork
 
         IAdminRepositoryInterface Admin { get; }
 
+        ILearnerrepositoryInterface Learner { get; }
+
+        IStudentRepository Student { get; }
+
+        IGuestsRepositoryInterface Guests { get; }
+
+        ITeacherRepository Teacher { get; }
+
+        IStuffMemberRepositoryInterface StuffMember { get; }
+
         Task<int> SaveChangeAsync();
     }
 }

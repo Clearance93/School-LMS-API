@@ -13,7 +13,7 @@ namespace OrganizationCore
         public MappingProfile()
         {
             CreateMap<ApplicationUser, UserDto>().ReverseMap();
-            CreateMap<Teachers, UpdateUserDto>().ReverseMap();
+            CreateMap<Teachers, TeachersDto>().ReverseMap();
             CreateMap<Learners, LearnersDto>().ReverseMap();
             CreateMap<Students, StudentDto>().ReverseMap();
 

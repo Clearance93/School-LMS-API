@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThutonetOrganizationAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66620b7686c987fce9050c08db779298e79c86e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+355c60bb9c7a64be9e3673a44e8a08fc92225725")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThutonetOrganizationAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThutonetOrganizationAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

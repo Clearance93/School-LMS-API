@@ -52,6 +52,18 @@ namespace OrganizationUtility
             services.AddScoped<IAdminServiceInterface, AdminService>();
             services.AddScoped<IAdminRepositoryInterface, AdminRepository>();
 
+            services.AddScoped<IGuestsRepositoryInterface, GuestRepositry>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<ILearnerrepositoryInterface, LearnersRepository>();
+            services.AddScoped<IStuffMemberRepositoryInterface,StuffMemberRepository>();
+
+            services.AddScoped<IGuestServiceInterface, GuestService>();
+            services.AddScoped<ITeacherServiceInterface, TeacherService>();
+            services.AddScoped<ILearnerServiceInterface, LearnerService>();
+            services.AddScoped<IStuffMemberServiceInterface, StuffMemberService>();
+            services.AddScoped<IStudentServiceInterface, StudentServices>();
+
             return services;
         }
     }

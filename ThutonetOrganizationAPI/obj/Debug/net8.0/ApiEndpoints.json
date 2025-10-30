@@ -179,6 +179,385 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AllGuests",
+    "RelativePath": "api/School/getAllGuests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AllLearners",
+    "RelativePath": "api/School/getAllLearners",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AllStudents",
+    "RelativePath": "api/School/getAllStudents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AllStuffMembers",
+    "RelativePath": "api/School/getAllStuffMembers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AllTeachers",
+    "RelativePath": "api/School/getAllTeachers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "GetLearnerByEmail",
+    "RelativePath": "api/School/getlearnerByEmail/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "GetStudentByEmail",
+    "RelativePath": "api/School/getStudentByEmail/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "GetStuffMemberByEmail",
+    "RelativePath": "api/School/getStuffMemberByEmail/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "GetTeacherByEmail",
+    "RelativePath": "api/School/getTeacherByEmail/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AddNewGuest",
+    "RelativePath": "api/School/guest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.CreateDto.CreateGuestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AddNewLearner",
+    "RelativePath": "api/School/learner",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.CreateDto.CreateLearnerDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "RemoveGuest",
+    "RelativePath": "api/School/removeGuest/{email}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "RemoveLearner",
+    "RelativePath": "api/School/removeLearner/{email}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "RemoveStudent",
+    "RelativePath": "api/School/removeStudent/{email}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "RemoveStuffMember",
+    "RelativePath": "api/School/removeStuffMember/{email}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "RemoveTeacher",
+    "RelativePath": "api/School/removeTeacher/{email}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AddNewStudent",
+    "RelativePath": "api/School/student",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.CreateDto.CreateStudentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AddNewStuffMember",
+    "RelativePath": "api/School/stuffMember",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.CreateDto.CreateStuffMemberDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "AddNewTeacher",
+    "RelativePath": "api/School/teacher",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.CreateDto.CreateTeacherDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "UpdatingGuest",
+    "RelativePath": "api/School/update-guest/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.UpdateDto.UpdateGuestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "UpdatingLearner",
+    "RelativePath": "api/School/update-learner/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.UpdateDto.UpdateLearnerDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "UpdatingStudent",
+    "RelativePath": "api/School/update-student/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.UpdateDto.UpdateStudentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "UpdatingStuffMember",
+    "RelativePath": "api/School/update-stuff-member/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.UpdateDto.UpdateStuffMemberDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolController",
+    "Method": "UpdatingTeacher",
+    "RelativePath": "api/School/update-teacher/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "OrganizationDTO.Dto.UpdateDto.UpdateTeacherDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ThutonetOrganizationAPI.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

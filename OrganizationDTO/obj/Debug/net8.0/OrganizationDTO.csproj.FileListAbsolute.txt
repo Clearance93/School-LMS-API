@@ -9,3 +9,4 @@ C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationDTO
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationDTO\obj\Debug\net8.0\refint\OrganizationDTO.dll
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationDTO\obj\Debug\net8.0\OrganizationDTO.pdb
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationDTO\obj\Debug\net8.0\ref\OrganizationDTO.dll
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationDTO\obj\Debug\net8.0\OrganizationDTO.sourcelink.json

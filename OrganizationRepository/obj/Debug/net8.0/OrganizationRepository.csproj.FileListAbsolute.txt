@@ -19,3 +19,4 @@ C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationRep
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationRepository\obj\Debug\net8.0\refint\OrganizationRepository.dll
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationRepository\obj\Debug\net8.0\OrganizationRepository.pdb
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationRepository\obj\Debug\net8.0\ref\OrganizationRepository.dll
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\OrganizationRepository\obj\Debug\net8.0\OrganizationRepository.sourcelink.json
