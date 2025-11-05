@@ -30,12 +30,12 @@ namespace OrganizationServices
             {
                 var existingGuest = await _Work.Guests.GetGuestByEmailAsync(dto.GuestEmail!);
 
-                if (existingGuest == null)
+                if (existingGuest != null)
                 {
                     throw new Exception($"User with this email: {dto.GuestEmail} had not being found");
                 }
 
-                existingGuest.IsDeleted = false;
+                existingGuest!.IsDeleted = false;
                 existingGuest.IsActive = true;
                 existingGuest.CreatedAt = DateTime.Now;
                 existingGuest.UpdatedAt = DateTime.Now;

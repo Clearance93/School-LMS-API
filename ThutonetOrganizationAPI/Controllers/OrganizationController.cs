@@ -57,7 +57,7 @@ namespace ThutonetOrganizationAPI.Controllers
             }
             catch (Exception exception)
             {
-                _Logger.LogError($"An error occured while adding {dto.OrganizationName} organization");
+                _Logger.LogError($"An error occured while adding {dto.OrganizationName} organization: {exception.Message}");
             }
 
             throw new Exception();

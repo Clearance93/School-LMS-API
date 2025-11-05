@@ -172,3 +172,4 @@ C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\ThutonetOrganiz
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\ThutonetOrganizationAPI\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\ThutonetOrganizationAPI\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\ThutonetOrganizationAPI\obj\Debug\net8.0\ThutonetOrganizationAPI.sourcelink.json
+C:\Users\Clearance Morumudi\source\repos\ThutonetOrganizationAPI\ThutonetOrganizationAPI\bin\Debug\net8.0\Dapper.dll

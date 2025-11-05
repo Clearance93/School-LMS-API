@@ -558,6 +558,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ThutonetOrganizationAPI.Controllers.SchoolDasboardsController",
+    "Method": "GetAdminDashboard",
+    "RelativePath": "api/SchoolDasboards/adminDashboard/{organizationId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "organizationId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ThutonetOrganizationAPI.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

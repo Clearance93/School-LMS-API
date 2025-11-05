@@ -17,7 +17,7 @@ namespace OrganizationServices
         public OrganizationService(IUnitOfWork unit,
                                    IMapper mapper)
         {
-            _Unit = unit;
+            _Unit = unit ?? throw new ArgumentNullException(nameof(unit));
             _Mapper = mapper;
         }
 
@@ -42,6 +42,8 @@ namespace OrganizationServices
             admin.IsDeleted = false;
             admin.IsActive = true;
             admin.IsSuperAdmin = true;
+            admin.AdminProfilePicture = userData.ProfileImage;
+            admin.AdminBusinessEmail = userData.Email;
             admin.CreatedAt = DateTime.Now;
             admin.UpdatedAt = DateTime.Now;
             admin.OrganizationSetupId = organization.OrganizationSetupId;

@@ -6,8 +6,8 @@ namespace OrganizationIInterface.IReporitory
     {
         Task<IEnumerable<OrganizationSetup>> GetAllOrganizationAsync();
 
-        Task<OrganizationSetup> GetOrganizationAsync(Guid id);
+        Task<OrganizationSetup?> GetOrganizationAsync(Guid id);
 
-        Task<OrganizationSetup> GetOrganizationByEmailAsync(string email);
+        Task<OrganizationSetup?> GetOrganizationByEmailAsync(string email);
     }
 }
