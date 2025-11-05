@@ -22,7 +22,9 @@ namespace OrganizationRepository.Schools
             var query = @"SELECT * FROM vw_SchoolDashboardStats
                           WHERE OrganizationSetupId = @orgId";
 
-            return await connection.QueryFirstOrDefaultAsync<SchoolDashboardStatsDto>(query, new { orgId = id });
+            var dapperRequest = await connection.QueryFirstOrDefaultAsync<SchoolDashboardStatsDto>(query, new { orgId = id });
+
+            return dapperRequest;
         }
     }
 }
