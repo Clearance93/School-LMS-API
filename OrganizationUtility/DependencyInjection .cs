@@ -5,9 +5,13 @@ using Microsoft.Extensions.Logging;
 using OrganizationCore.Email_Sender;
 using OrganizationCore.UnitOfWork;
 using OrganizationIInterface.IReporitory;
+using OrganizationIInterface.IReporitory.Schools;
 using OrganizationIInterface.IService;
+using OrganizationIInterface.IService.School;
 using OrganizationRepository;
+using OrganizationRepository.Schools;
 using OrganizationServices;
+using OrganizationServices.School;
 using Services.Repository;
 
 namespace OrganizationUtility
@@ -51,6 +55,21 @@ namespace OrganizationUtility
             services.AddScoped< IOrganizationServiceInterface, OrganizationService>();
             services.AddScoped<IAdminServiceInterface, AdminService>();
             services.AddScoped<IAdminRepositoryInterface, AdminRepository>();
+
+            services.AddScoped<IGuestsRepositoryInterface, GuestRepositry>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<ILearnerrepositoryInterface, LearnersRepository>();
+            services.AddScoped<IStuffMemberRepositoryInterface,StuffMemberRepository>();
+
+            services.AddScoped<IGuestServiceInterface, GuestService>();
+            services.AddScoped<ITeacherServiceInterface, TeacherService>();
+            services.AddScoped<ILearnerServiceInterface, LearnerService>();
+            services.AddScoped<IStuffMemberServiceInterface, StuffMemberService>();
+            services.AddScoped<IStudentServiceInterface, StudentServices>();
+
+            services.AddScoped<ISchoolDashboardRepositoryInterface, AdminDashboardRepository>();
+            services.AddScoped<ISchoolDashboardServiceInterface, SchoolDashboardServices>();
 
             return services;
         }

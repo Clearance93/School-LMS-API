@@ -2,11 +2,10 @@
 using Microsoft.Extensions.Logging;
 using OrganizationCore.UnitOfWork;
 using OrganizationDTO.Dto;
-using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.UpdateDto;
 using OrganizationIInterface.IReporitory;
 using OrganizationIInterface.IService;
-using OrganizationModels.Model;
+using OrganizationModels;
 
 namespace OrganizationServices
 {

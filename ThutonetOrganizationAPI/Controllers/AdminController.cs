@@ -30,7 +30,7 @@ namespace ThutonetOrganizationAPI.Controllers
             }
             catch (Exception exception)
             {
-                _Logger.LogError($"Failed to get the uer based on the email: {email}");
+                _Logger.LogError($"Failed to get the uer based on the email: {email}: {exception.Message}");
 
                 throw;
             }
