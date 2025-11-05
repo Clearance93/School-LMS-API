@@ -1,6 +1,7 @@
 ﻿using OrganizationDTO.Dto;
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.UpdateDto;
+using OrganizationModels;
 
 namespace OrganizationIInterface.IService
 {

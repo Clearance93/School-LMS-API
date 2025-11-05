@@ -21,12 +21,12 @@ namespace OrganizationRepository
                                                   .ToListAsync();
         }
 
-        public async Task<OrganizationSetup> GetOrganizationAsync(Guid id)
+        public async Task<OrganizationSetup?> GetOrganizationAsync(Guid id)
         {
             return await _Context.OrganizationSetup.FirstOrDefaultAsync(org => org.OrganizationSetupId == id);
         }
 
-        public async Task<OrganizationSetup> GetOrganizationByEmailAsync(string email)
+        public async Task<OrganizationSetup?> GetOrganizationByEmailAsync(string email)
         {
             var existingOrganization = await _Context.OrganizationSetup.Where(org => org.AdminEmail == email)
                                                                        .Select(org => new OrganizationSetup
