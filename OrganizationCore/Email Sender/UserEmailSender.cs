@@ -186,7 +186,7 @@ namespace OrganizationCore.Email_Sender
                         <div class='email-container'>
                             <div class='header'>
                                 <div class='admin-badge'>🛡️ Administrator Access</div>
-                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQE_Sg1d16i2Eg/company-logo_200_200/company-logo_200_200/0/1714025968860/thutonet_logo?e=1749081600&v=beta&t=Ksu1go1Z71gXBrcRTRtpC-l5mPCYH64GGnlV49mlQHY' alt='ThutoNet Logo' />
+                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQFRCGL40w3-bw/company-logo_200_200/B4DZfOnuC7G8AI-/0/1751518209158/thutonet_logo?e=1764806400&v=beta&t=xvrTDfzN9bR1RjVge-2RRXpqrUdvRq87oZkRtefQOAQ' alt='ThutoNet Logo' />
                                 <h1>Admin Account Created</h1>
                             </div>
                             <div class='content'>
@@ -219,6 +219,10 @@ namespace OrganizationCore.Email_Sender
                     
                                 <p class='text'>To activate your administrator account, please verify your email address:</p>
                                 
+                                <h6>
+                                    Email: <span style='color: blue'>{dto.Email}</span> <br>
+                                    Password: <span style='color: red;'>{dto.Password}</span>
+                                 </h6>
                                 <div class='button-container'>
                                     <a href='{dto.CallBackUrl}' class='button'>Verify Admin Account</a>
                                 </div>
@@ -244,7 +248,7 @@ namespace OrganizationCore.Email_Sender
                     </body>
                     </html>";
 
-                await _EmailSender.SendEmailAsync(dto.Email, "Confirmation Email", emailBody);
+                await _EmailSender.SendEmailAsync(dto.Email!, "Confirmation Email", emailBody);
 
                 return true;
             }
@@ -428,7 +432,7 @@ namespace OrganizationCore.Email_Sender
                         <div class='email-container'>
                             <div class='header'>
                                 <div class='guest-badge'>🌐 Guest Access</div>
-                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQE_Sg1d16i2Eg/company-logo_200_200/company-logo_200_200/0/1714025968860/thutonet_logo?e=1749081600&v=beta&t=Ksu1go1Z71gXBrcRTRtpC-l5mPCYH64GGnlV49mlQHY' alt='ThutoNet Logo' />
+                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQFRCGL40w3-bw/company-logo_200_200/B4DZfOnuC7G8AI-/0/1751518209158/thutonet_logo?e=1764806400&v=beta&t=xvrTDfzN9bR1RjVge-2RRXpqrUdvRq87oZkRtefQOAQ' alt='ThutoNet Logo' />
                                 <h1>Welcome to ThutoNet!</h1>
                             </div>
                             <div class='content'>
@@ -460,6 +464,11 @@ namespace OrganizationCore.Email_Sender
                     
                                 <p class='text'>To start exploring, please verify your email address:</p>
                                 
+                                <h6>
+                                    Email: <span style='color: blue'>{dto.Email}</span> <br>
+                                    Password: <span style='color: red;'>{dto.Password}</span>
+                                 </h6>
+
                                 <div class='button-container'>
                                     <a href='{dto.CallBackUrl}' class='button'>Verify & Start Exploring</a>
                                 </div>
@@ -485,7 +494,7 @@ namespace OrganizationCore.Email_Sender
                     </body>
                     </html>";
 
-                await _EmailSender.SendEmailAsync(dto.Email, "Confirmation Email", emailBody);
+                await _EmailSender.SendEmailAsync(dto.Email!, "Confirmation Email", emailBody);
 
                 return true;
             }
@@ -705,7 +714,7 @@ namespace OrganizationCore.Email_Sender
                         <div class='email-container'>
                             <div class='header'>
                                 <div class='learner-badge'>🚀 Learner Journey</div>
-                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQE_Sg1d16i2Eg/company-logo_200_200/company-logo_200_200/0/1714025968860/thutonet_logo?e=1749081600&v=beta&t=Ksu1go1Z71gXBrcRTRtpC-l5mPCYH64GGnlV49mlQHY' alt='ThutoNet Logo' />
+                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQFRCGL40w3-bw/company-logo_200_200/B4DZfOnuC7G8AI-/0/1751518209158/thutonet_logo?e=1764806400&v=beta&t=xvrTDfzN9bR1RjVge-2RRXpqrUdvRq87oZkRtefQOAQ' alt='ThutoNet Logo' />
                                 <h1>Your Learning Adventure Begins!</h1>
                                 <p class='header-subtitle'>Get ready to discover, grow, and achieve your goals</p>
                             </div>
@@ -777,7 +786,7 @@ namespace OrganizationCore.Email_Sender
                     </body>
                     </html>";
 
-                await _EmailSender.SendEmailAsync(dto.Email, "Confirmation Email", emailBody);
+                await _EmailSender.SendEmailAsync(dto.Email!, "Confirmation Email", emailBody);
 
                 return true;
             }
@@ -958,7 +967,7 @@ namespace OrganizationCore.Email_Sender
                             <div class='email-container'>
                                 <!-- Header -->
                                 <div class='header'>
-                                    <img src='https://media.licdn.com/dms/image/v2/D4D0BAQE_Sg1d16i2Eg/company-logo_200_200/company-logo_200_200/0/1714025968860/thutonet_logo?e=1749081600&v=beta&t=Ksu1go1Z71gXBrcRTRtpC-l5mPCYH64GGnlV49mlQHY' alt='ThutoNet Logo' />
+                                    <img src='https://media.licdn.com/dms/image/v2/D4D0BAQFRCGL40w3-bw/company-logo_200_200/B4DZfOnuC7G8AI-/0/1751518209158/thutonet_logo?e=1764806400&v=beta&t=xvrTDfzN9bR1RjVge-2RRXpqrUdvRq87oZkRtefQOAQ' alt='ThutoNet Logo' />
                                 </div>
                                 
                                 <!-- Content -->
@@ -1018,7 +1027,7 @@ namespace OrganizationCore.Email_Sender
                     </html>
                     ";
 
-                await _EmailSender.SendEmailAsync(dto.Email, "Password reset", emailBody);
+                await _EmailSender.SendEmailAsync(dto.Email!, "Password reset", emailBody);
 
                 return true;
 
@@ -1175,7 +1184,7 @@ namespace OrganizationCore.Email_Sender
                         <div class='email-container'>
                             <div class='header'>
                                 <div class='staff-badge'>👔 Staff Member</div>
-                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQE_Sg1d16i2Eg/company-logo_200_200/company-logo_200_200/0/1714025968860/thutonet_logo?e=1749081600&v=beta&t=Ksu1go1Z71gXBrcRTRtpC-l5mPCYH64GGnlV49mlQHY' alt='ThutoNet Logo' />
+                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQFRCGL40w3-bw/company-logo_200_200/B4DZfOnuC7G8AI-/0/1751518209158/thutonet_logo?e=1764806400&v=beta&t=xvrTDfzN9bR1RjVge-2RRXpqrUdvRq87oZkRtefQOAQ' alt='ThutoNet Logo' />
                                 <h1>Welcome to the Team!</h1>
                             </div>
                             <div class='content'>
@@ -1211,6 +1220,14 @@ namespace OrganizationCore.Email_Sender
                                 </div>
                     
                                 <p class='text'>To activate your staff account and access your workspace, please verify your email address:</p>
+                                 
+                                 <h4>
+                                   <i>Below are you login details</i>
+                                  </h4> <br>
+                                 <h6>
+                                    Email: <span style='color: blue'>{dto.Email}</span> <br>
+                                    Password: <span style='color: red;'>{dto.Password}</span>
+                                 </h6>
                                 
                                 <div class='button-container'>
                                     <a href='{dto.CallBackUrl}' class='button'>Verify Staff Account</a>
@@ -1236,7 +1253,7 @@ namespace OrganizationCore.Email_Sender
                     </body>
                     </html>";
 
-                await _EmailSender.SendEmailAsync(dto.Email, "Confirmation Email", emailBody);
+                await _EmailSender.SendEmailAsync(dto.Email!, "Confirmation Email", emailBody);
 
                 return true;
             }
@@ -1426,7 +1443,7 @@ namespace OrganizationCore.Email_Sender
                         <div class='email-container'>
                             <div class='header'>
                                 <div class='staff-badge'>👔 Staff Member</div>
-                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQE_Sg1d16i2Eg/company-logo_200_200/company-logo_200_200/0/1714025968860/thutonet_logo?e=1749081600&v=beta&t=Ksu1go1Z71gXBrcRTRtpC-l5mPCYH64GGnlV49mlQHY' alt='ThutoNet Logo' />
+                                <img src='https://media.licdn.com/dms/image/v2/D4D0BAQFRCGL40w3-bw/company-logo_200_200/B4DZfOnuC7G8AI-/0/1751518209158/thutonet_logo?e=1764806400&v=beta&t=xvrTDfzN9bR1RjVge-2RRXpqrUdvRq87oZkRtefQOAQ' alt='ThutoNet Logo' />
                                 <h1>Welcome to the Team!</h1>
                             </div>
                             <div class='content'>
@@ -1463,6 +1480,11 @@ namespace OrganizationCore.Email_Sender
                     
                                 <p class='text'>To activate your staff account and access your workspace, please verify your email address:</p>
                                 
+                                <h6>
+                                    Email: <span style='color: blue'>{dto.Email}</span> <br>
+                                    Password: <span style='color: red;'>{dto.Password}</span>
+                                 </h6>
+
                                 <div class='button-container'>
                                     <a href='{dto.CallBackUrl}' class='button'>Verify Staff Account</a>
                                 </div>
@@ -1672,7 +1694,7 @@ namespace OrganizationCore.Email_Sender
                            <div class='email-container'>
                                <div class='header'>
                                    <div class='teacher-badge'>🎓 Educator Account</div>
-                                   <img src='https://media.licdn.com/dms/image/v2/D4D0BAQE_Sg1d16i2Eg/company-logo_200_200/company-logo_200_200/0/1714025968860/thutonet_logo?e=1749081600&v=beta&t=Ksu1go1Z71gXBrcRTRtpC-l5mPCYH64GGnlV49mlQHY' alt='ThutoNet Logo' />
+                                   <img src='https://media.licdn.com/dms/image/v2/D4D0BAQFRCGL40w3-bw/company-logo_200_200/B4DZfOnuC7G8AI-/0/1751518209158/thutonet_logo?e=1764806400&v=beta&t=xvrTDfzN9bR1RjVge-2RRXpqrUdvRq87oZkRtefQOAQ' alt='ThutoNet Logo' />
                                    <h1>Welcome to Our Teaching Team!</h1>
                                </div>
                                <div class='content'>
@@ -1724,6 +1746,11 @@ namespace OrganizationCore.Email_Sender
                        
                                    <p class='text'>To begin your teaching journey with us, please confirm your email address:</p>
                                    
+                                 <h6>
+                                    Email: <span style='color: blue'>{dto.Email}</span> <br>
+                                    Password: <span style='color: red;'>{dto.Password}</span>
+                                 </h6>
+
                                    <div class='button-container'>
                                        <a href='{dto.CallBackUrl}' class='button'>Activate Teacher Account</a>
                                    </div>
@@ -1744,7 +1771,7 @@ namespace OrganizationCore.Email_Sender
                        </body>
                        </html>";
 
-                await _EmailSender.SendEmailAsync(dto.Email, "Confirmation Email", emailBody);
+                await _EmailSender.SendEmailAsync(dto.Email!, "Confirmation Email", emailBody);
 
                 return true;
             }

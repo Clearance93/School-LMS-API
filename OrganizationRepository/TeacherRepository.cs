@@ -14,6 +14,14 @@ namespace OrganizationRepository
             _Context = context;
         }
 
+        public async Task<IEnumerable<Teachers?>> GetAllOrganizationTeachersAsync(Guid id)
+        {
+            var teachers =  await _Context.Teachers.Where(t => t.OrganizationSetupId == id)
+                                                   .ToListAsync();
+
+            return teachers;
+        }
+
         public async Task<Teachers?> GetTeacherByEmailAsync(string email)
         {
             return await _Context.Teachers.FirstOrDefaultAsync(t => t.TeacherEmail == email);

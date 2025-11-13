@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using OrganizationCore.Paasword;
 using OrganizationCore.UnitOfWork;
+using OrganizationDTO;
 using OrganizationDTO.Dto;
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.UpdateDto;
@@ -12,12 +14,19 @@ namespace OrganizationServices
     {
         private readonly IUnitOfWork _Unit;
         private readonly IMapper _Mapper;
+        private readonly IUserServiceInterface _AddnewUser;
+        private readonly IPasswordGenerationInterface _Password;
+
 
         public TeacherService(IUnitOfWork unit,
-                              IMapper mapper)
+                              IMapper mapper,
+                              IUserServiceInterface addnewUser,
+                              IPasswordGenerationInterface password)
         {
             _Unit = unit ?? throw new ArgumentNullException(nameof(unit));
-            _Mapper = mapper ?? throw new ArgumentNullException(nameof(_Mapper));
+            _Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _AddnewUser = addnewUser ?? throw new ArgumentNullException(nameof(addnewUser));
+            _Password = password ?? throw new ArgumentNullException(nameof(password));
         }
 
         public async Task<bool> AddNewTeacherAsync(CreateTeacherDto dto)
@@ -27,6 +36,23 @@ namespace OrganizationServices
             if (existingUser != null)
             {
                 throw new OrganizationCore.Exceptions.InvalidOperationException($"The email {dto.TeacherEmail} already exist and it belongs to: \n {dto.FirstName} {dto.LastName}");
+            }
+
+            if (dto.Password == null)
+            {
+                var generativePassword = _Password.GeneratePasswordAsync(12);
+
+                var teacher = new CreateUserDto
+                {
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    Email = dto.TeacherEmail,
+                    ProfileImage = dto.TeacherProfilePicture,
+                    Password = generativePassword,
+                    Role = "Teacher"
+                };
+
+                await _AddnewUser.CreateUserAsync(teacher);
             }
 
             var user = _Mapper.Map<Teachers>(dto);
@@ -68,9 +94,9 @@ namespace OrganizationServices
             return true;
         }
 
-        public async Task<IEnumerable<TeachersDto>> GetAllTeachersAsync()
+        public async Task<IEnumerable<TeachersDto>> GetAllTeachersAsync(Guid id)
         {
-            var teachers = await _Unit.Teacher.GetAllAsync();
+            var teachers = await _Unit.Teacher.GetAllOrganizationTeachersAsync(id);
 
             return _Mapper.Map<IEnumerable<TeachersDto>>(teachers);
         }

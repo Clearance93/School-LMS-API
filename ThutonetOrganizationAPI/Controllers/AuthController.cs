@@ -4,6 +4,7 @@ using OrganizationCore.Exceptions;
 using OrganizationDTO;
 using OrganizationDTO.Dto;
 using OrganizationIInterface.IService;
+using System.Text;
 
 namespace ThutonetOrganizationAPI.Controllers
 {
@@ -170,5 +171,41 @@ namespace ThutonetOrganizationAPI.Controllers
                 throw;
             }
         }
+
+        [HttpPut("confirm-email/{userId}-token/{token}")]
+        public async Task<IActionResult> EmailConfirmation(string userId, string token)
+        {
+            try
+            {
+                //var originalToken = FromBase64UrlSafe(token);
+
+                var emailConfirmation = await _User.EmailConfirmationAsync(userId, token);
+
+                return Ok(emailConfirmation);
+            }
+            catch (Exception exception)
+            {
+                throw new OrganizationCore.Exceptions.InvalidOperationException($"Failed to confrim the email. {exception.Message}");
+            }
+        }
+
+        //private string FromBase64UrlSafe(string token)
+        //{
+        //    var base64 = token
+        //        .Replace('-', '+')
+        //        .Replace('_', '/');
+
+        //    switch (base64.Length % 4)
+        //    {
+        //        case 2: base64 += "==";
+        //            break;
+        //        case 3: base64 += "=";
+        //            break;
+        //    }
+
+        //    var bytes = Convert.FromBase64String(base64);
+
+        //    return Encoding.UTF8.GetString(bytes);
+        //}
     }
 }

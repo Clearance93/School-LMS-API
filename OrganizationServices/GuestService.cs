@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using OrganizationCore.Paasword;
 using OrganizationCore.UnitOfWork;
+using OrganizationDTO;
 using OrganizationDTO.Dto;
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.UpdateDto;
@@ -14,14 +16,20 @@ namespace OrganizationServices
         private readonly IUnitOfWork _Work;
         private readonly ILogger<GuestService> _Logger;
         private readonly IMapper _Mapper;
+        private readonly IUserServiceInterface _AddnewUser;
+        private readonly IPasswordGenerationInterface _Password;
 
         public GuestService(IUnitOfWork work,
                             ILogger<GuestService> logger,
-                            IMapper mapper)
+                            IMapper mapper,
+                            IUserServiceInterface user,
+                            IPasswordGenerationInterface password)
         {
             _Work = work ?? throw new ArgumentNullException(nameof(work));
             _Logger = logger;
             _Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _AddnewUser = user ?? throw new ArgumentNullException(nameof(user));
+            _Password = password ?? throw new ArgumentNullException(nameof(password));
         }
 
         public async Task<bool> AddNewGuestAsync(CreateGuestDto dto)
@@ -35,12 +43,31 @@ namespace OrganizationServices
                     throw new Exception($"User with this email: {dto.GuestEmail} had not being found");
                 }
 
-                existingGuest!.IsDeleted = false;
-                existingGuest.IsActive = true;
-                existingGuest.CreatedAt = DateTime.Now;
-                existingGuest.UpdatedAt = DateTime.Now;
+                if (dto.Password == null)
+                {
+                    var passwordGeneration = _Password.GeneratePasswordAsync(12);
 
-                await _Work.Guests.AddAsync(existingGuest);
+                    var guestUser = new CreateUserDto
+                    {
+                        FirstName = dto.FirstName,
+                        LastName = dto.LastName,
+                        Email = dto.GuestEmail,
+                        ProfileImage = dto.GuestProfilePicture,
+                        Password = passwordGeneration,
+                        Role = "Guest"
+                    };
+
+                    await _AddnewUser.CreateUserAsync(guestUser);
+                }
+
+                var user = _Mapper.Map<Guests>(dto);
+
+                user!.IsDeleted = false;
+                user.IsActive = true;
+                user.CreatedAt = DateTime.Now;
+                user.UpdatedAt = DateTime.Now;
+
+                await _Work.Guests.AddAsync(user);
 
                 await _Work.SaveChangeAsync();
 

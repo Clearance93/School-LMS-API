@@ -181,12 +181,12 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpGet("getAllTeachers")]
-        public async Task<IActionResult> AllTeachers()
+        [HttpGet("getAllTeachers/{organizationId}")]
+        public async Task<IActionResult> AllTeachers(Guid organizationId)
         {
             try
             {
-                return Ok(await _Teacher.GetAllTeachersAsync());
+                return Ok(await _Teacher.GetAllTeachersAsync(organizationId));
             }
             catch (Exception exception)
             {
@@ -375,7 +375,7 @@ namespace ThutonetOrganizationAPI.Controllers
                 throw new Exception(exception.Message);
             }
         }
-
+        
         [HttpDelete("removeStuffMember/{email}")]
         public async Task<IActionResult> RemoveStuffMember(string email)
         {

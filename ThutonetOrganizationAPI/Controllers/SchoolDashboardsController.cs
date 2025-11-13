@@ -6,11 +6,11 @@ namespace ThutonetOrganizationAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SchoolDasboardsController : ControllerBase
+    public class SchoolDashboardsController : ControllerBase
     {
         private readonly ISchoolDashboardServiceInterface _School;
 
-        public SchoolDasboardsController(ISchoolDashboardServiceInterface school)
+        public SchoolDashboardsController(ISchoolDashboardServiceInterface school)
         {
             _School = school;
         }
@@ -20,7 +20,9 @@ namespace ThutonetOrganizationAPI.Controllers
         {
             try
             {
-                return Ok(await _School.GetSchoolDashboardServiceAsync(organizationId));
+                var adminValues = await _School.GetSchoolDashboardServiceAsync(organizationId);
+
+                return Ok(adminValues);
             }
             catch (Exception exception)
             {

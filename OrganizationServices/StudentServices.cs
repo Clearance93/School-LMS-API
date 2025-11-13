@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using OrganizationCore.Paasword;
 using OrganizationCore.UnitOfWork;
+using OrganizationDTO;
 using OrganizationDTO.Dto;
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.UpdateDto;
@@ -14,14 +16,20 @@ namespace OrganizationServices
         private readonly IUnitOfWork _Unit;
         private readonly ILogger<StudentServices> _Logger;
         private readonly IMapper _Mapper;
+        private readonly IUserServiceInterface _User;
+        private readonly IPasswordGenerationInterface _Password;
 
         public StudentServices(IUnitOfWork unit,
                                ILogger<StudentServices> logger,
-                               IMapper mapper)
+                               IMapper mapper,
+                               IUserServiceInterface user,
+                               IPasswordGenerationInterface password)
         {
             _Unit = unit ?? throw new ArgumentNullException(nameof(unit));
-            _Logger = logger ?? throw new ArgumentNullException(nameof(_Logger));
+            _Logger = logger;
             _Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _User = user ?? throw new ArgumentNullException(nameof(user));
+            _Password = password ?? throw new ArgumentNullException(nameof(password));
         }
 
         public async Task<bool> AddNewStudentAsync(CreateStudentDto dto)
@@ -31,6 +39,23 @@ namespace OrganizationServices
             if (existingStudent != null)
             {
                 throw new InvalidOperationException($"The user with the email: {dto.StudentEmail} already existi");
+            }
+
+            if (dto.Password == null)
+            {
+                var passwordGeneration = _Password.GeneratePasswordAsync(12);
+
+                var student = new CreateUserDto
+                {
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    Email = dto.StudentEmail,
+                    Password = passwordGeneration,
+                    ProfileImage = dto.StudentProfilePicture,
+                    Role = "Student"
+                };
+
+                await _User.CreateUserAsync(student);
             }
 
             var user = _Mapper.Map<Students>(dto);

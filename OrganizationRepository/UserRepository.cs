@@ -14,6 +14,11 @@ namespace OrganizationRepository
             _Context = context;
         }
 
+        public async Task<ApplicationUser?> CheckEmailConfirmationAsync(string userId)
+        {
+            return await _Context.Users.FirstOrDefaultAsync(s => s.Id == userId);
+        }
+
         public async Task<IEnumerable<ApplicationUser?>> GetAllActiveUsersAsync()
         {
             return await _Context.ApplicationUsers.Where(user => user.IsActive && !user.IsDeleted)

@@ -1,5 +1,6 @@
 ﻿using OrganizationIInterface.IReporitory;
-using OrganizationIInterface.IService;
+using OrganizationIInterface.IReporitory.Schools;
+using OrganizationIInterface.IReporitory.Schools.Settings;
 
 namespace OrganizationCore.UnitOfWork
 {
@@ -20,6 +21,20 @@ namespace OrganizationCore.UnitOfWork
         ITeacherRepository Teacher { get; }
 
         IStuffMemberRepositoryInterface StuffMember { get; }
+
+        ISchoolAdminSettingsrepositoryInterface SchoolAdminSettings { get; }
+
+        IGradeRepositoryInterface Grade {  get; }
+
+        IGradeStreamRepositoryInterface GradeStream { get; }
+
+        ICourseStreamRepositoryInterface CourseStream { get; }
+
+        ISchoolSubjectRepositoryInterface SchoolSubject { get; }
+
+        IExamGradeScaleRepositoryInterface ExamGrade { get; }
+
+        ILibraryInterfaceRepository Library { get; }
 
         Task<int> SaveChangeAsync();
     }

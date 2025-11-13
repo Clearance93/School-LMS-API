@@ -14,10 +14,12 @@ namespace OrganizationIInterface.IService
 
         Task<ResponseUserDto> CreateUserAsync(CreateUserDto dto);
 
-        Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto dto);
+        Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto dto, string token = null!);
 
         Task<ResponseUserDto> AuthenticateUserAsync(UserLoginDto dto);
 
         Task<string> GeneratePasswordResetTOkenRepositoryAsnc(string email);
+
+        Task<bool> EmailConfirmationAsync(string userId, string token);
     }
 }

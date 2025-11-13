@@ -36,6 +36,23 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("getAdminById/{adminId}")]
+        public async Task<IActionResult> GetAdminById(Guid adminId)
+        {
+            try
+            {
+                var admin = await _Admin.GetAdminByIdAsync(adminId);
+
+                return Ok(admin);
+            }
+            catch (Exception exception)
+            {
+                _Logger.LogError($"Failed to get the uer based on the email: {adminId}: {exception.Message}");
+
+                throw;
+            }
+        }
+
         [HttpPut("updateAdmin/{adminId}")]
         public async Task<IActionResult> UpdatingAnAdmin(Guid adminId, UpdateAdminDto dto)
         {

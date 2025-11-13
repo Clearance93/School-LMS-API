@@ -10,6 +10,8 @@
 
         public string? TeacherProfilePicture { get; set; }
 
+        public string? Password { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public bool IsActive { get; set; }
