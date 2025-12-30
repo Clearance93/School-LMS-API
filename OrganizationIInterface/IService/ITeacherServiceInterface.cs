@@ -14,6 +14,6 @@ namespace OrganizationIInterface.IService
 
         Task<TeachersDto> GetTeacherByEmailAsync(string email);
 
-        Task<IEnumerable<TeachersDto>> GetAllTeachersAsync();
+        Task<IEnumerable<TeachersDto>> GetAllTeachersAsync(Guid id);
     }
 }

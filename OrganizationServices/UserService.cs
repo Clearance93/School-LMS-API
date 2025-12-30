@@ -9,7 +9,6 @@ using OrganizationDTO;
 using OrganizationDTO.Dto;
 using OrganizationIInterface.IService;
 using OrganizationModels;
-using OrganizationModels.Model;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -39,12 +38,12 @@ namespace OrganizationServices
             _UserManager = userManager;
             _Configuration = configuration;
             _UserEmailSender = userEmailSender;
-            //_ProductionBaseUrl = _Configuration["AppSettings:ProductionBaseUrl"] ?? throw new ArgumentNullException("Production base URL is not configured.");
+            _ProductionBaseUrl = _Configuration["AppSettings:ProductionBaseUrl"] ?? throw new ArgumentNullException(nameof(_ProductionBaseUrl)); 
         }
 
         public async Task<ResponseUserDto> CreateUserAsync(CreateUserDto dto)
         {
-            var existingUser = await _UnitOfWork.Users.GetUserByEmailAsync(dto.Email);
+            var existingUser = await _UnitOfWork.Users.GetUserByEmailAsync(dto.Email!);
 
             if (existingUser != null)
             {
@@ -55,7 +54,7 @@ namespace OrganizationServices
 
             var user = _Mapper.Map<ApplicationUser>(dto);
 
-            user.Password = passwordHasher.HashPassword(user, dto.Password);
+            user.Password = passwordHasher.HashPassword(user, dto.Password!);
 
             user.Id = Guid.NewGuid().ToString();
             user.IsActive = true;
@@ -90,7 +89,10 @@ namespace OrganizationServices
 
             var token = await _UserManager.GenerateEmailConfirmationTokenAsync(user);
 
-            var callbackUrl = $"{_ProductionBaseUrl}confirm-email?userId={user.Id}&token={token}";
+            var encodedToken = Uri.EscapeDataString(token);
+            var encodedUserId = Uri.EscapeDataString(user.Id);
+
+            var callbackUrl = $"{_ProductionBaseUrl}confirm-email?userId={encodedUserId}&token={encodedToken}";
 
             var emailData = new EmailSenderDto
             {
@@ -98,7 +100,8 @@ namespace OrganizationServices
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                Role = role
+                Role = role,
+                Password = dto.Password
             };
 
             if (role == "Student")
@@ -109,11 +112,10 @@ namespace OrganizationServices
 
                 return userWithToken;
             }
-            else if (role == "Guest")
+            else 
+            if (role == "Guest")
             {
                 await _UserEmailSender.GuestEmailSender(emailData);
-
-                var roleResult = await _UserManager.AddToRoleAsync(user, role);
 
                 var userWithToken = await UserRole(user, role);
 
@@ -159,15 +161,20 @@ namespace OrganizationServices
 
         private async Task<ResponseUserDto> UserRole(ApplicationUser user, string role)
         {
-            var roleResult = await _UserManager.AddToRoleAsync(user, role);
+            var isInRole = await _UserManager.IsInRoleAsync(user, role);
 
-            if (!roleResult.Succeeded)
+            if (!isInRole)
             {
-                await _UserManager.DeleteAsync(user);
+                var roleResult = await _UserManager.AddToRoleAsync(user, role);
 
-                var errors = string.Join(", ", roleResult.Errors.Select(e => e.Description));
+                if (!roleResult.Succeeded)
+                {
+                    await _UserManager.DeleteAsync(user);
 
-                throw new OrganizationCore.Exceptions.InvalidOperationException($"Assigning role failed: {errors}");
+                    var errors = string.Join(", ", roleResult.Errors.Select(e => e.Description));
+
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"Assigning role failed: {errors}");
+                }
             }
 
             var userRoles = await _UserManager.GetRolesAsync(user);
@@ -256,7 +263,7 @@ namespace OrganizationServices
             return _Mapper.Map<UserDto>(user);
         }
 
-        public async Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto dto)
+        public async Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto dto, string token = null!)
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
@@ -367,6 +374,24 @@ namespace OrganizationServices
             await _UserEmailSender.PasswordResetAsync(emailSender);
 
             return passwordResertToken;
+        }
+
+        public async Task<bool> EmailConfirmationAsync(string userId, string token)
+        {
+            var userExistance = await _UnitOfWork.Users.CheckEmailConfirmationAsync(userId);
+
+            if (userExistance == null)
+            {
+                throw new OrganizationCore.Exceptions.InvalidOperationException($"The user this the Id: {userId} does not exist");
+            }
+
+            userExistance.EmailConfirmed= true;
+
+            _UnitOfWork.Users.Update(userExistance);
+
+            await _UnitOfWork.SaveChangeAsync();
+
+            return true;
         }
     }
 }

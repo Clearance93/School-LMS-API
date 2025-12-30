@@ -13,6 +13,11 @@ namespace OrganizationRepository
             _Context = context;
         }
 
+        public async Task<IEnumerable<Guests>> GetAllOrganizationGuest(Guid organizationId)
+        {
+            return await _Context.Guests.Where(g => g.OrganizationSetupId == organizationId).ToListAsync();
+        }
+
         public async Task<Guests?> GetGuestByEmailAsync(string email)
         {
             return await _Context.Guests.FirstOrDefaultAsync(g => g.GuestEmail == email);

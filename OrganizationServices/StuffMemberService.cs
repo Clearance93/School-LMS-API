@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using OrganizationCore.Paasword;
 using OrganizationCore.UnitOfWork;
+using OrganizationDTO;
 using OrganizationDTO.Dto;
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.UpdateDto;
@@ -12,21 +14,61 @@ namespace OrganizationServices
     {
         private readonly IUnitOfWork _Unit;
         private readonly IMapper _Mapper;
+        private readonly IUserServiceInterface _AddnewUser;
+        private readonly IPasswordGenerationInterface _Password;
 
         public StuffMemberService(IUnitOfWork unit,
-                                 IMapper mapper)
+                                 IMapper mapper,
+                                 IUserServiceInterface user,
+                                 IPasswordGenerationInterface password)
         {
             _Unit = unit ?? throw new ArgumentNullException(nameof(unit));
             _Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _AddnewUser = user ?? throw new ArgumentNullException(nameof(user));
+            _Password = password ?? throw new ArgumentNullException(nameof(password));
         }
 
         public async Task<bool> AddNewStuffMemberAsync(CreateStuffMemberDto dto)
         {
+            var link = await _Unit.RegistrationLink.GetByIdAsync(dto.RegistrationLinkId);
+
+            if (link != null)
+            {
+                link.UserCount++;
+
+                if (link.UserCount <= link.MaxUsers)
+                {
+                    _Unit.RegistrationLink.Update(link);
+                }
+                else
+                {
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The link is broken due to max limit of {link.MaxUsers}");
+                }
+            }
+
             var existingStuffMember = await _Unit.StuffMember.GetStuffMemberByEmailAsync(dto.StuffmemberEmail!);
 
             if (existingStuffMember != null)
             {
                 throw new OrganizationCore.Exceptions.InvalidOperationException($"The email {dto.StuffmemberEmail} already exist and it belongs to: \n {dto.FirstName} {dto.LastName}");
+            }
+
+            if (dto.Password == null)
+            {
+                var passwordGeneration = _Password.GeneratePasswordAsync(12);
+
+                var stuffMember = new CreateUserDto
+                {
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    Email = dto.StuffmemberEmail,
+                    ProfileImage = dto.StuffMemberProfilePicture,
+                    Password = passwordGeneration,
+                    Role = "StuffMember"
+                };
+
+                await _AddnewUser.CreateUserAsync(stuffMember);
+
             }
 
             var user = _Mapper.Map<StuffMembers>(dto);
@@ -68,9 +110,9 @@ namespace OrganizationServices
             return true;
         }
 
-        public async Task<IEnumerable<StuffMemberDto>> GetAllStuffMembersAsync()
+        public async Task<IEnumerable<StuffMemberDto>> GetAllStuffMembersAsync(Guid organizationId)
         {
-            var stuffMembers = await _Unit.StuffMember.GetAllAsync();
+            var stuffMembers = await _Unit.StuffMember.GetAllOrganizationStuffMembers(organizationId);
 
             return _Mapper.Map<IEnumerable<StuffMemberDto>>(stuffMembers);
         }

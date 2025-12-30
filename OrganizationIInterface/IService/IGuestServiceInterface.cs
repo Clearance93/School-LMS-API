@@ -14,6 +14,6 @@ namespace OrganizationIInterface.IService
 
         Task<GuestsDto> GetGuestAsync(Guid id);
 
-        Task<IEnumerable<GuestsDto>> GetAllGuestAsync();
+        Task<IEnumerable<GuestsDto>> GetAllGuestAsync(Guid organizationId);
     }
 }

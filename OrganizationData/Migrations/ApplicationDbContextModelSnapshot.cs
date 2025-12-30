@@ -296,6 +296,58 @@ namespace OrganizationData.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("OrganizationModels.Model.Communication.Message", b =>
+                {
+                    b.Property<Guid>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsModified")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("RecipientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("RecipientName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecipientRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("Message");
+                });
+
             modelBuilder.Entity("OrganizationModels.Model.Guests", b =>
                 {
                     b.Property<Guid>("GuestId")
@@ -427,6 +479,265 @@ namespace OrganizationData.Migrations
                     b.HasKey("OrganizationSetupId");
 
                     b.ToTable("OrganizationSetup");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.RegistrrationLink", b =>
+                {
+                    b.Property<Guid>("RegistrationLinkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaxUsers")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UrlLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("RegistrationLinkId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("RegistrrationLink");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.CourseStreams", b =>
+                {
+                    b.Property<Guid>("CourseStreamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CourseStreamName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CourseStreamId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("CourseStreams");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.ExamGradeScale", b =>
+                {
+                    b.Property<Guid>("ExamGradeScaleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("AverageMark")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DistinctionMark")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ExcellentMark")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("PassMark")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PoorMark")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ExamGradeScaleId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("ExamGradeScale");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.Grade", b =>
+                {
+                    b.Property<Guid>("GradeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GradeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("GradeId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("Grades");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.GradeStream", b =>
+                {
+                    b.Property<Guid>("StreamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("GradeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StreamName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("StreamId");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("GradeStreams");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.LibraryItem", b =>
+                {
+                    b.Property<Guid>("LibraryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Book")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoverImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Genre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Year")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LibraryId");
+
+                    b.ToTable("LibraryItem");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.SchoolAdminSettings", b =>
+                {
+                    b.Property<Guid>("SchoolAdminSettingsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContactEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Locale")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SchoolMotto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TimeZone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SchoolAdminSettingsId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("SchoolAdminSettings");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.SchoolSubjects", b =>
+                {
+                    b.Property<Guid>("SubjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CourseStreamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("GradeLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SubjectId");
+
+                    b.HasIndex("CourseStreamId");
+
+                    b.ToTable("SchoolSubjects");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.Students", b =>
@@ -620,6 +931,17 @@ namespace OrganizationData.Migrations
                     b.Navigation("OrganizationSetup");
                 });
 
+            modelBuilder.Entity("OrganizationModels.Model.Communication.Message", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
             modelBuilder.Entity("OrganizationModels.Model.Guests", b =>
                 {
                     b.HasOne("OrganizationModels.Model.OrganizationSetup", "OrganizationSetup")
@@ -640,6 +962,95 @@ namespace OrganizationData.Migrations
                         .IsRequired();
 
                     b.Navigation("OrganizationSetup");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.RegistrrationLink", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.CourseStreams", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.ExamGradeScale", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.Grade", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId");
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.GradeStream", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.Settings.Grade", "Grade")
+                        .WithMany()
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId");
+
+                    b.HasOne("OrganizationModels.Model.Teachers", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grade");
+
+                    b.Navigation("Organization");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.SchoolAdminSettings", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Settings.SchoolSubjects", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.Settings.CourseStreams", "CourseStream")
+                        .WithMany()
+                        .HasForeignKey("CourseStreamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CourseStream");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.Students", b =>

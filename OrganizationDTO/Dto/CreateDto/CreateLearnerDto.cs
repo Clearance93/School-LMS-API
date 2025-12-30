@@ -4,6 +4,8 @@
     {
         public string? FirstName { get; set; }
 
+        public Guid RegistrationLinkId { get; set; }
+
         public string? LastName { get; set; }
 
         public string? LeanerEmail { get; set; }

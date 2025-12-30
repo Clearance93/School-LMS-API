@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using OrganizationCore.Email_Sender;
 using OrganizationData;
 using OrganizationModels;
 using OrganizationUtility;
-using Services.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,6 +4,8 @@
     {
         public string? FirstName { get; set; }
 
+        public Guid RegistrationLinkId { get; set; }
+
         public string? LastName { get; set; }
 
         public string? StuffmemberEmail { get; set; }
@@ -11,6 +13,8 @@
         public string? StuffMemberPosition { get; set; }
 
         public string? StuffMemberProfilePicture { get; set; }
+
+        public string? Password { get; set; }
 
         public bool IsDeleted { get; set; }
 

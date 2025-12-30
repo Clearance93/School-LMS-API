@@ -3,15 +3,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OrganizationCore.Email_Sender;
+using OrganizationCore.Paasword;
 using OrganizationCore.UnitOfWork;
 using OrganizationIInterface.IReporitory;
 using OrganizationIInterface.IReporitory.Schools;
+using OrganizationIInterface.IReporitory.Schools.Settings;
 using OrganizationIInterface.IService;
 using OrganizationIInterface.IService.School;
+using OrganizationIInterface.IService.School.Settings;
 using OrganizationRepository;
 using OrganizationRepository.Schools;
+using OrganizationRepository.Settings;
 using OrganizationServices;
 using OrganizationServices.School;
+using OrganizationServices.School.Settings;
 using Services.Repository;
 
 namespace OrganizationUtility
@@ -70,6 +75,28 @@ namespace OrganizationUtility
 
             services.AddScoped<ISchoolDashboardRepositoryInterface, AdminDashboardRepository>();
             services.AddScoped<ISchoolDashboardServiceInterface, SchoolDashboardServices>();
+            services.AddScoped<IPasswordGenerationInterface, PasswordGeneration>();
+
+            services.AddScoped<ISchoolAdminSettingsrepositoryInterface, SchoolAdminSettingsRepository>();
+            services.AddScoped<ISchoolAdminSettingsServiceInterface, SchoolAdminSettingsServices>();
+
+            services.AddScoped<IGradeStreamRepositoryInterface, GradeStreamRepository>();
+            services.AddScoped<IGradeRepositoryInterface, GradeRepository>();
+            services.AddScoped<ISettingsServiceInterface, SettingsService>();
+
+            services.AddScoped<ICourseStreamRepositoryInterface, CourseStreamRepository>();
+            services.AddScoped<ISchoolSubjectRepositoryInterface, SchoolSubjectRepository>();
+            services.AddScoped<ICourseStreamServiceInterface, CourseStreamService>();
+            services.AddScoped<ISchoolSubjectServiceInterface, SchoolSubjectService>();
+
+            services.AddScoped<IExamGradeScaleRepositoryInterface, ExamGradeScaleRepository>();
+            services.AddScoped<IExamGradeScaleServiceInterface, ExamGradeScaleService>();
+            services.AddScoped<ILibraryInterfaceRepository, LibraryRepository>();
+            services.AddScoped<ILibraryInterfaceService, LibrarService>();
+
+            services.AddScoped<IRegistrationLinkRepositoryInterface, RegistrationRepository>();
+            services.AddScoped<IRegistrationLinkServiceInterface, RegistrationService>();
+            services.AddScoped<ICommunicationMessageInterfaceRepository, ComminicationMessageRepository>();
 
             return services;
         }

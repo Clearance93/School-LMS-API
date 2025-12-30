@@ -23,6 +23,12 @@ namespace OrganizationRepository
 
         public async Task<OrganizationSetup?> GetOrganizationAsync(Guid id)
         {
+            var dbName = _Context.Database.GetDbConnection().Database;
+            var dataSource = _Context.Database.GetDbConnection().DataSource;
+
+            Console.WriteLine($"DB: {dbName}");
+            Console.WriteLine($"Server: {dataSource}");
+
             return await _Context.OrganizationSetup.FirstOrDefaultAsync(org => org.OrganizationSetupId == id);
         }
 

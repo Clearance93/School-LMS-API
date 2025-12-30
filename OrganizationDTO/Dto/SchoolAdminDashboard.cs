@@ -5,7 +5,5 @@
         public Guid OrganizationId { get; set; }
 
         public string? OrganizationName { get; set; }
-
-
     }
 }
