@@ -94,6 +94,10 @@ namespace OrganizationUtility
             services.AddScoped<ILibraryInterfaceRepository, LibraryRepository>();
             services.AddScoped<ILibraryInterfaceService, LibrarService>();
 
+            services.AddScoped<IRegistrationLinkRepositoryInterface, RegistrationRepository>();
+            services.AddScoped<IRegistrationLinkServiceInterface, RegistrationService>();
+            services.AddScoped<ICommunicationMessageInterfaceRepository, ComminicationMessageRepository>();
+
             return services;
         }
     }

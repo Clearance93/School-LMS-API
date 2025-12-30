@@ -36,6 +36,22 @@ namespace OrganizationServices
         {
             try
             {
+                var link = await _Work.RegistrationLink.GetByIdAsync(dto.RegistrationLinkId);
+
+                if (link != null)
+                {
+                    link.UserCount++;
+
+                    if (link.UserCount <= link.MaxUsers)
+                    {
+                        _Work.RegistrationLink.Update(link);
+                    }
+                    else
+                    {
+                        throw new OrganizationCore.Exceptions.InvalidOperationException($"The link is broken due to max limit of {link.MaxUsers}");
+                    }
+                }
+
                 var existingGuest = await _Work.Guests.GetGuestByEmailAsync(dto.GuestEmail!);
 
                 if (existingGuest != null)
@@ -108,9 +124,9 @@ namespace OrganizationServices
             }
         }
 
-        public async Task<IEnumerable<GuestsDto>> GetAllGuestAsync()
+        public async Task<IEnumerable<GuestsDto>> GetAllGuestAsync(Guid organizationId)
         {
-            var guests = await _Work.Guests.GetAllAsync();
+            var guests = await _Work.Guests.GetAllOrganizationGuest(organizationId);
 
             return _Mapper.Map<IEnumerable<GuestsDto>>(guests);
         }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OrganizationModels;
 using OrganizationModels.Model;
+using OrganizationModels.Model.Communication;
 using OrganizationModels.Model.Settings;
 
 namespace OrganizationData
@@ -41,5 +42,9 @@ namespace OrganizationData
         public DbSet<ExamGradeScale> ExamGradeScale { get; set; }
 
         public DbSet<LibraryItem> LibraryItem { get; set; }
+
+        public DbSet<RegistrrationLink> RegistrrationLink { get; set; }
+
+        public DbSet<Message> Message { get; set; }
     }
 }

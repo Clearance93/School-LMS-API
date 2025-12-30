@@ -13,6 +13,8 @@ namespace OrganizationModels.Model.Settings
 
         public string? Genre { get; set; }
 
+        public string? Book { get; set; }
+
         public string? Description { get; set; }
 
         public string? Year { get; set; }

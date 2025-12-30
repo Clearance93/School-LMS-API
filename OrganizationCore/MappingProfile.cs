@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using OrganizationDTO;
 using OrganizationDTO.Dto;
+using OrganizationDTO.Dto.Communication;
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.Settings;
 using OrganizationDTO.Dto.UpdateDto;
 using OrganizationModels;
 using OrganizationModels.Model;
+using OrganizationModels.Model.Communication;
 using OrganizationModels.Model.Settings;
 
 namespace OrganizationCore
@@ -196,6 +198,31 @@ namespace OrganizationCore
                 .ForMember(dest => dest.LibraryId, opt => opt.Ignore()) 
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<RegistrrationLink, GeneretingRegistrationLinkDto>().ReverseMap();
+
+            CreateMap<RegistrrationLink, GeneretingRegistrationLinkDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<Message, BroadcastMessageDto>().ReverseMap();
+
+            CreateMap<Message, BroadcastMessageDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<Message, BroadcastMessageDto>().ReverseMap();
+
+            CreateMap<Message, MessagesDto>()
+                .ForMember(dest => dest.TimeStamp, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<Message, BroadcastMessageDto>().ReverseMap();
+
+            CreateMap<Message, CreateMessageDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ReverseMap();
         }
     }

@@ -12,6 +12,8 @@
 
         public string? Description { get; set; }
 
+        public string? Book { get; set; }
+
         public string? Year { get; set; }
 
         public string? CoverImage { get; set; }

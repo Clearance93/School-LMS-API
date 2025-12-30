@@ -18,7 +18,7 @@ namespace ThutonetOrganizationAPI.Controllers
             _LibraryService = liraryService ?? throw new ArgumentNullException(nameof(liraryService));
         }
 
-        [HttpDelete("DeleteLibraryItem/{id}")]
+        [HttpDelete("deleteLibraryItem/{id}")]
         public async Task<IActionResult> DeleteLibraryItemAsync(Guid id)
         {
             try
@@ -35,7 +35,7 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpGet("GetAllLibraryItems")]
+        [HttpGet("getAllLibraryItems")]
         public async Task<IActionResult> GetLibraryItem()
         {
             try
@@ -52,7 +52,7 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpGet("GetLibraryItemById/{id}")]
+        [HttpGet("getLibraryItemById/{id}")]
         public async Task<IActionResult> GetLibraryItemByIdAsync(Guid id)
         {
             try
@@ -69,7 +69,7 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpPost("AddLibraryItem")]
+        [HttpPost("addLibraryItem")]
         public async Task<IActionResult> AddLibraryItemAsync([FromBody] LibraryItemsDto library)
         {
             try
@@ -86,7 +86,7 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpPut("UpdateLibraryItem/{id}")]
+        [HttpPut("updateLibraryItem/{id}")]
         public async Task<IActionResult> UpdateLibraryItemAsync(Guid id, [FromBody] LibraryItemsDto library)
         {
             try

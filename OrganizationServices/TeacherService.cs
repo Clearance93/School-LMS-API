@@ -31,6 +31,22 @@ namespace OrganizationServices
 
         public async Task<bool> AddNewTeacherAsync(CreateTeacherDto dto)
         {
+            var link = await _Unit.RegistrationLink.GetByIdAsync(dto.RegistrationLinkId);
+
+            if (link != null)
+            {
+                link.UserCount++;
+
+                if (link.UserCount <= link.MaxUsers)
+                {
+                    _Unit.RegistrationLink.Update(link);
+                }
+                else
+                {
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The link is broken due to max limit of {link.MaxUsers}");
+                }
+            }
+
             var existingUser = await _Unit.Teacher.GetTeacherByEmailAsync(dto.TeacherEmail!);
 
             if (existingUser != null)

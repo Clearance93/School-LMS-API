@@ -296,6 +296,58 @@ namespace OrganizationData.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("OrganizationModels.Model.Communication.Message", b =>
+                {
+                    b.Property<Guid>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsModified")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("RecipientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("RecipientName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecipientRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("Message");
+                });
+
             modelBuilder.Entity("OrganizationModels.Model.Guests", b =>
                 {
                     b.Property<Guid>("GuestId")
@@ -429,6 +481,43 @@ namespace OrganizationData.Migrations
                     b.ToTable("OrganizationSetup");
                 });
 
+            modelBuilder.Entity("OrganizationModels.Model.RegistrrationLink", b =>
+                {
+                    b.Property<Guid>("RegistrationLinkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaxUsers")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UrlLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("RegistrationLinkId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("RegistrrationLink");
+                });
+
             modelBuilder.Entity("OrganizationModels.Model.Settings.CourseStreams", b =>
                 {
                     b.Property<Guid>("CourseStreamId")
@@ -557,10 +646,13 @@ namespace OrganizationData.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Book")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CoverImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -572,7 +664,7 @@ namespace OrganizationData.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Year")
@@ -839,6 +931,17 @@ namespace OrganizationData.Migrations
                     b.Navigation("OrganizationSetup");
                 });
 
+            modelBuilder.Entity("OrganizationModels.Model.Communication.Message", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
             modelBuilder.Entity("OrganizationModels.Model.Guests", b =>
                 {
                     b.HasOne("OrganizationModels.Model.OrganizationSetup", "OrganizationSetup")
@@ -859,6 +962,17 @@ namespace OrganizationData.Migrations
                         .IsRequired();
 
                     b.Navigation("OrganizationSetup");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.RegistrrationLink", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.OrganizationSetup", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.Settings.CourseStreams", b =>

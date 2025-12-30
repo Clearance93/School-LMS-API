@@ -39,6 +39,10 @@ namespace OrganizationCore.UnitOfWork
 
         public ILibraryInterfaceRepository Library { get; private set; }
 
+        public IRegistrationLinkRepositoryInterface RegistrationLink { get; private set; }
+
+        public ICommunicationMessageInterfaceRepository Communication { get; private set; }
+
         public UnitOfWork(ApplicationDbContext context,
                           IUSerRepositoryInterface user,
                           IOrganizationRepositoryInterface organization,
@@ -54,7 +58,9 @@ namespace OrganizationCore.UnitOfWork
                           ISchoolSubjectRepositoryInterface schoolSubject,
                           ICourseStreamRepositoryInterface courseStream,
                           IExamGradeScaleRepositoryInterface examGrades,
-                          ILibraryInterfaceRepository libary)
+                          ILibraryInterfaceRepository libary,
+                          IRegistrationLinkRepositoryInterface registrationLink,
+                          ICommunicationMessageInterfaceRepository communication)
         {
             _Context = context;
             Users = user ?? throw new ArgumentNullException(nameof(user));
@@ -72,6 +78,8 @@ namespace OrganizationCore.UnitOfWork
             CourseStream = courseStream ?? throw new ArgumentNullException(nameof(courseStream));
             ExamGrade = examGrades ?? throw new ArgumentNullException(nameof(examGrades));
             Library = libary ?? throw new ArgumentNullException(nameof(libary));
+            RegistrationLink = registrationLink ?? throw new ArgumentNullException(nameof(registrationLink));
+            Communication = communication ?? throw new ArgumentNullException(nameof(communication));
         }
 
         public void Dispose()

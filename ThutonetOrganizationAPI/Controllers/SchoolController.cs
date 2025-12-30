@@ -2,6 +2,7 @@
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.UpdateDto;
 using OrganizationIInterface.IService;
+using OrganizationIInterface.IService.School;
 
 namespace ThutonetOrganizationAPI.Controllers
 {
@@ -51,7 +52,9 @@ namespace ThutonetOrganizationAPI.Controllers
         {
             try
             {
-                return Ok(await _Student.AddNewStudentAsync(dto));
+                var student = await _Student.AddNewStudentAsync(dto);
+
+                return Ok(student);
             }
             catch (Exception exception)
             {
@@ -196,12 +199,12 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpGet("getAllLearners")]
-        public async Task<IActionResult> AllLearners()
+        [HttpGet("getAllLearners/{organizationId}")]
+        public async Task<IActionResult> AllLearners(Guid organizationId)
         {
             try
             {
-                return Ok(await _Learner.GetAllLearnersAsync());
+                return Ok(await _Learner.GetAllLearnersAsync(organizationId));
             }
             catch (Exception exception)
             {
@@ -211,12 +214,12 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpGet("getAllStudents")]
-        public async Task<IActionResult> AllStudents()
+        [HttpGet("getAllStudents/{organizationId}")]
+        public async Task<IActionResult> AllStudents(Guid organizationId)
         {
             try
             {
-                return Ok(await _Student.GetAllStudentsAsync());
+                return Ok(await _Student.GetAllStudentsAsync(organizationId));
             }
             catch (Exception exception)
             {
@@ -226,12 +229,12 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpGet("getAllGuests")]
-        public async Task<IActionResult> AllGuests()
+        [HttpGet("getAllGuests/{organizationId}")]
+        public async Task<IActionResult> AllGuests(Guid organizationId)
         {
             try
             {
-                return Ok(await _Guest.GetAllGuestAsync());
+                return Ok(await _Guest.GetAllGuestAsync(organizationId));
             }
             catch (Exception exception)
             {
@@ -241,12 +244,12 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        [HttpGet("getAllStuffMembers")]
-        public async Task<IActionResult> AllStuffMembers()
+        [HttpGet("getAllStuffMembers/{organizationId}")]
+        public async Task<IActionResult> AllStuffMembers(Guid organizationId)
         {
             try
             {
-                return Ok(await _StuffMember.GetAllStuffMembersAsync());
+                return Ok(await _StuffMember.GetAllStuffMembersAsync(organizationId));
             }
             catch (Exception exception)
             {

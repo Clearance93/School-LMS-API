@@ -117,8 +117,6 @@ namespace OrganizationServices
             {
                 await _UserEmailSender.GuestEmailSender(emailData);
 
-                //var roleResult = await _UserManager.AddToRoleAsync(user, role);
-
                 var userWithToken = await UserRole(user, role);
 
                 return userWithToken;

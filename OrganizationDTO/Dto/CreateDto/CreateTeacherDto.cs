@@ -6,6 +6,8 @@
 
         public string? LastName { get; set; }
 
+        public Guid RegistrationLinkId { get; set; }
+
         public string? TeacherEmail { get; set; }
 
         public string? TeacherProfilePicture { get; set; }

@@ -30,6 +30,22 @@ namespace OrganizationServices
 
         public async Task<bool> AddNewStuffMemberAsync(CreateStuffMemberDto dto)
         {
+            var link = await _Unit.RegistrationLink.GetByIdAsync(dto.RegistrationLinkId);
+
+            if (link != null)
+            {
+                link.UserCount++;
+
+                if (link.UserCount <= link.MaxUsers)
+                {
+                    _Unit.RegistrationLink.Update(link);
+                }
+                else
+                {
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The link is broken due to max limit of {link.MaxUsers}");
+                }
+            }
+
             var existingStuffMember = await _Unit.StuffMember.GetStuffMemberByEmailAsync(dto.StuffmemberEmail!);
 
             if (existingStuffMember != null)
@@ -94,9 +110,9 @@ namespace OrganizationServices
             return true;
         }
 
-        public async Task<IEnumerable<StuffMemberDto>> GetAllStuffMembersAsync()
+        public async Task<IEnumerable<StuffMemberDto>> GetAllStuffMembersAsync(Guid organizationId)
         {
-            var stuffMembers = await _Unit.StuffMember.GetAllAsync();
+            var stuffMembers = await _Unit.StuffMember.GetAllOrganizationStuffMembers(organizationId);
 
             return _Mapper.Map<IEnumerable<StuffMemberDto>>(stuffMembers);
         }

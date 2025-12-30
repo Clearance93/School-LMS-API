@@ -36,6 +36,10 @@ namespace OrganizationCore.UnitOfWork
 
         ILibraryInterfaceRepository Library { get; }
 
+        IRegistrationLinkRepositoryInterface RegistrationLink { get; }
+
+        ICommunicationMessageInterfaceRepository Communication {  get; }
+
         Task<int> SaveChangeAsync();
     }
 }
