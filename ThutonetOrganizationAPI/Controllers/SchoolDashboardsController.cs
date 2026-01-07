@@ -35,6 +35,21 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("teacherDashboard/{organizationId}/{teacherId}")]
+        public async Task<IActionResult> GetAdminDashboard(Guid organizationId, Guid teacherId)
+        {
+            try
+            {
+                var teacherDashboard = await _School.GetTeacherDashboardViewAsync(organizationId, teacherId);
+
+                return Ok(teacherDashboard);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
         [HttpPost("generatingLinks")]
         public async Task<IActionResult> RegistrationLinkGeneration(GeneretingRegistrationLinkDto dto)
         {
@@ -92,6 +107,21 @@ namespace ThutonetOrganizationAPI.Controllers
             catch (Exception exception)
             {
                 throw new Exception(exception.Message);
+            }
+        }
+
+        [HttpGet("getMessages/{organizationId}/{senderId}")]
+        public async Task<IActionResult> AllMessageByIds(Guid organizationId, Guid senderId)
+        {
+            try
+            {
+                var messages = await _School.GetAllMessagesByIds(organizationId, senderId);
+
+                return Ok(messages);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message + " " + exception.StackTrace);
             }
         }
     }

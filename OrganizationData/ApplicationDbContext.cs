@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using OrganizationModels;
 using OrganizationModels.Model;
 using OrganizationModels.Model.Communication;
@@ -46,5 +47,25 @@ namespace OrganizationData
         public DbSet<RegistrrationLink> RegistrrationLink { get; set; }
 
         public DbSet<Message> Message { get; set; }
+
+        public DbSet<Event> Events { get; set; }
+
+        public DbSet<Activities> Activities { get; set; }
+
+        public DbSet<ClassSchedule> ClassSchedules { get; set; }
+
+        public DbSet<StudentAttendance> StudentAttendances { get; set; }
+
+        public DbSet<AttendanceSession> AttendanceSessions { get; set; }
+
+        public DbSet<TeachingClass> TeachingClass { get; set; }
+
+        public DbSet<AssignmentGrades> AssignmentGrades { get; set; }
+
+        public DbSet<Assignment> Assignments { get; set; }
+
+        public DbSet<AssignmentSubmission> AssignmentSubmissions { get; set; }
+
+        public DbSet<AttendanceOverview> AttendanceOverviews { get; set; }
     }
 }

@@ -4,6 +4,8 @@
     {
         public Guid BroadcastId { get; set; }
 
+        public string Content { get; set; }
+
         public string? SenderEmail { get; set; }
 
         public string? Role { get; set; }

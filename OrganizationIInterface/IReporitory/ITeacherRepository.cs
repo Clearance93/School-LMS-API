@@ -7,5 +7,7 @@ namespace OrganizationIInterface.IReporitory
         Task<Teachers?> GetTeacherByEmailAsync(string email);
 
         Task<IEnumerable<Teachers?>> GetAllOrganizationTeachersAsync(Guid id);
+
+        Task<Teachers?> GetTeacherByOrganization(Guid organization, Guid teacher);
     }
 }

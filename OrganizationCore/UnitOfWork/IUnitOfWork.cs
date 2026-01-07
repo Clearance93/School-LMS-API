@@ -1,4 +1,5 @@
 ﻿using OrganizationIInterface.IReporitory;
+using OrganizationIInterface.IReporitory.Assignments;
 using OrganizationIInterface.IReporitory.Schools;
 using OrganizationIInterface.IReporitory.Schools.Settings;
 
@@ -39,6 +40,30 @@ namespace OrganizationCore.UnitOfWork
         IRegistrationLinkRepositoryInterface RegistrationLink { get; }
 
         ICommunicationMessageInterfaceRepository Communication {  get; }
+
+        IEventInterfaceRerpository Events { get; }
+
+        IActivitiesRepositoryInertface Activities { get; }
+
+        IClassScheduleInterfaceRepository ClassSchedule { get; }
+
+        IStudentAttendanceInterfaceRepository StudentAttendance { get; }
+
+        IAttendanceSessionInterfaceRepository AttendanceSession { get; }
+
+        ITeachingClassInterfaceRepository TeachingClass { get; }
+
+        IAssingmentGradesRepositoryInterface AssignmentGrades { get; }
+
+        IAssignmentSubmissionRepositoryInterface AssignmentSubmission { get; }
+
+        IAssignmentRepositoryInterface Assignments { get; }
+
+        IAttendanceOverViewRepositoryInterface AttendanceOverview { get; }
+
+        ITeacherDashboardViewRepositoryInterface TeacherDashboard { get; }
+
+        ISchoolDashboardRepositoryInterface SchoolDashboard { get; }
 
         Task<int> SaveChangeAsync();
     }

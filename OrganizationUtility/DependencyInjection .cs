@@ -6,12 +6,16 @@ using OrganizationCore.Email_Sender;
 using OrganizationCore.Paasword;
 using OrganizationCore.UnitOfWork;
 using OrganizationIInterface.IReporitory;
+using OrganizationIInterface.IReporitory.Assignments;
 using OrganizationIInterface.IReporitory.Schools;
 using OrganizationIInterface.IReporitory.Schools.Settings;
 using OrganizationIInterface.IService;
+using OrganizationIInterface.IService.Assignments;
 using OrganizationIInterface.IService.School;
 using OrganizationIInterface.IService.School.Settings;
+using OrganizationModels.Model;
 using OrganizationRepository;
+using OrganizationRepository.Assignments;
 using OrganizationRepository.Schools;
 using OrganizationRepository.Settings;
 using OrganizationServices;
@@ -97,6 +101,25 @@ namespace OrganizationUtility
             services.AddScoped<IRegistrationLinkRepositoryInterface, RegistrationRepository>();
             services.AddScoped<IRegistrationLinkServiceInterface, RegistrationService>();
             services.AddScoped<ICommunicationMessageInterfaceRepository, ComminicationMessageRepository>();
+
+            services.AddScoped<IEventInterfaceRerpository, EventRepository>();
+            services.AddScoped<IEventServiceInterface, EventServices>();
+            services.AddScoped<IActivitiesRepositoryInertface, ActivitiesRepository>();
+            services.AddScoped<IActitiesServicesInterface, ActivitiesServices>();
+
+            services.AddScoped<IAttendanceSessionInterfaceRepository, AttendanceSessionRepository>();
+            services.AddScoped<IStudentAttendanceInterfaceRepository, StudentAttendanceRepository>();
+            services.AddScoped<IClassScheduleInterfaceRepository, ClassScheduleRepository>();
+            services.AddScoped<ITeachingClassInterfaceRepository, TeachingClassRepository>();
+            services.AddScoped<ITeacherScheduleInterfaceService, TeacherScheduleService>();
+
+            services.AddScoped<IAssignmentRepositoryInterface, AssingmentRepository>();
+            services.AddScoped<IAssignmentSubmissionRepositoryInterface, AssignmentSubmissionRepository>();
+            services.AddScoped<IAssingmentGradesRepositoryInterface, AssignmentGradesRepository>();
+            services.AddScoped<IAssignmentServiceInterface, AssignmentServices>();
+
+            services.AddScoped<IAttendanceOverViewRepositoryInterface, AttendanceOverviewRepository>();
+            services.AddScoped<ITeacherDashboardViewRepositoryInterface, TeacherDashboardRepository>();
 
             return services;
         }

@@ -4,6 +4,6 @@ namespace OrganizationIInterface.IReporitory
 {
     public interface ICommunicationMessageInterfaceRepository : IGenericRepository<Message>
     {
-        
+        Task<IEnumerable<Message>> GetAllMessagesByIdsAsync(Guid organizationId, Guid senderId);
     }
 }
