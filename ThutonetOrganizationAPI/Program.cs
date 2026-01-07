@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OrganizationData;
 using OrganizationModels;
 using OrganizationUtility;
+using OrganizationUtility.Sealed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
+
+builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
+                    options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+                });
 
 // Add services to the container.
 

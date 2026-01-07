@@ -26,5 +26,11 @@ namespace OrganizationRepository
         {
             return await _Context.Teachers.FirstOrDefaultAsync(t => t.TeacherEmail == email);
         }
+
+        public async Task<Teachers?> GetTeacherByOrganization(Guid organizationId, Guid teacherId)
+        {
+            return await _Context.Teachers.FirstOrDefaultAsync(t => t.OrganizationSetupId == organizationId &&
+                                                                    t.TeacherId == teacherId);
+        }
     }
 }

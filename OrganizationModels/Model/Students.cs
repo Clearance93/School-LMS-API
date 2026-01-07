@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OrganizationModels.Model.Settings;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrganizationModels.Model
 {
@@ -19,15 +20,18 @@ namespace OrganizationModels.Model
 
         public string? Gender { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
-        public Guid OrganizationSetupId { get; set; }
+        public Guid? GradeStreamId { get; set; }
+        public GradeStream? GradeStream { get; set; }
+
+        public Guid? OrganizationSetupId { get; set; }
 
         public OrganizationSetup? OrganizationSetup { get; set; }
     }

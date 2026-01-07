@@ -1,5 +1,6 @@
 ﻿using OrganizationData;
 using OrganizationIInterface.IReporitory;
+using OrganizationIInterface.IReporitory.Assignments;
 using OrganizationIInterface.IReporitory.Schools;
 using OrganizationIInterface.IReporitory.Schools.Settings;
 using OrganizationIInterface.IService;
@@ -43,6 +44,30 @@ namespace OrganizationCore.UnitOfWork
 
         public ICommunicationMessageInterfaceRepository Communication { get; private set; }
 
+        public IEventInterfaceRerpository Events {  get; private set; }
+
+        public IActivitiesRepositoryInertface Activities {  get; private set; }
+
+        public IClassScheduleInterfaceRepository ClassSchedule { get; private set; }
+
+        public IStudentAttendanceInterfaceRepository StudentAttendance { get; private set; }
+
+        public IAttendanceSessionInterfaceRepository AttendanceSession { get; private set; }
+
+        public ITeachingClassInterfaceRepository TeachingClass { get; private set; }
+
+        public IAssingmentGradesRepositoryInterface AssignmentGrades { get; private set; }
+
+        public IAssignmentSubmissionRepositoryInterface AssignmentSubmission { get; private set; }
+
+        public IAssignmentRepositoryInterface Assignments { get; private set; }
+
+        public IAttendanceOverViewRepositoryInterface AttendanceOverview { get; private set; }
+
+        public ITeacherDashboardViewRepositoryInterface TeacherDashboard {get ; private set;}
+
+        public ISchoolDashboardRepositoryInterface SchoolDashboard { get; private set; }
+
         public UnitOfWork(ApplicationDbContext context,
                           IUSerRepositoryInterface user,
                           IOrganizationRepositoryInterface organization,
@@ -60,7 +85,19 @@ namespace OrganizationCore.UnitOfWork
                           IExamGradeScaleRepositoryInterface examGrades,
                           ILibraryInterfaceRepository libary,
                           IRegistrationLinkRepositoryInterface registrationLink,
-                          ICommunicationMessageInterfaceRepository communication)
+                          ICommunicationMessageInterfaceRepository communication,
+                          IEventInterfaceRerpository events,
+                          IActivitiesRepositoryInertface activities,
+                          ITeachingClassInterfaceRepository teachingClass,
+                          IAttendanceSessionInterfaceRepository attendenceSession,
+                          IStudentAttendanceInterfaceRepository studentAttendance,
+                          IClassScheduleInterfaceRepository classSchedule,
+                          IAssingmentGradesRepositoryInterface assignmentGrades,
+                          IAssignmentSubmissionRepositoryInterface assignmentSubmission,
+                          IAssignmentRepositoryInterface assignment,
+                          IAttendanceOverViewRepositoryInterface attendanceOverview,
+                          ITeacherDashboardViewRepositoryInterface teacherDashboard,
+                          ISchoolDashboardRepositoryInterface schoolDashboard)
         {
             _Context = context;
             Users = user ?? throw new ArgumentNullException(nameof(user));
@@ -80,6 +117,18 @@ namespace OrganizationCore.UnitOfWork
             Library = libary ?? throw new ArgumentNullException(nameof(libary));
             RegistrationLink = registrationLink ?? throw new ArgumentNullException(nameof(registrationLink));
             Communication = communication ?? throw new ArgumentNullException(nameof(communication));
+            Events = events ?? throw new ArgumentNullException(nameof(events));
+            Activities = activities ?? throw new ArgumentNullException(nameof(activities));
+            ClassSchedule = classSchedule ?? throw new ArgumentNullException(nameof(classSchedule));
+            TeachingClass = teachingClass ?? throw new ArgumentNullException(nameof(teachingClass));
+            StudentAttendance = studentAttendance ?? throw new ArgumentNullException(nameof(studentAttendance));
+            AttendanceSession = attendenceSession ?? throw new ArgumentNullException(nameof(attendenceSession));
+            AssignmentGrades = assignmentGrades ?? throw new ArgumentNullException(nameof(AssignmentGrades));
+            AssignmentSubmission = assignmentSubmission ?? throw new ArgumentNullException(nameof(assignmentSubmission));
+            Assignments = assignment ?? throw new ArgumentNullException(nameof(assignment));
+            AttendanceOverview = attendanceOverview ?? throw new ArgumentNullException(nameof(attendanceOverview));
+            TeacherDashboard = teacherDashboard ?? throw new ArgumentNullException(nameof(teacherDashboard));
+            SchoolDashboard = schoolDashboard ?? throw new ArgumentNullException(nameof(schoolDashboard));
         }
 
         public void Dispose()

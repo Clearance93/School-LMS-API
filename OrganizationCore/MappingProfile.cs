@@ -224,6 +224,50 @@ namespace OrganizationCore
             CreateMap<Message, CreateMessageDto>()
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ReverseMap();
+
+            CreateMap<Event, EventDto>().ReverseMap();
+
+            CreateMap<Event, EventDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<Event, UpdateEventDto>()
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<Activities, ActivitiesDto>().ReverseMap();
+
+            CreateMap<Activities, ActivitiesDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<Activities, UpdateActivitiesDto>().ReverseMap();
+
+            CreateMap<OrganizationSetup, Activities>().ReverseMap();
+
+            CreateMap<TeachingClass, TeachingClassDto>().ReverseMap();
+            CreateMap<StudentAttendance, StudentAttendanceDto>().ReverseMap();
+            CreateMap<AttendanceSession, AttendanceSessionDto>().ReverseMap();
+            CreateMap<ClassSchedule, ClassScheduleDto>().ReverseMap();
+
+            CreateMap<Assignment, AssignmentDto>().ReverseMap();
+
+            CreateMap<Assignment, AssignmentDto>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<AssignmentGrades, AssignmentGradesDto>().ReverseMap();
+
+            CreateMap<AssignmentGrades, AssignmentGradesDto>()
+                .ForMember(dest => dest.GradedDate, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<AssignmentSubmission, AssignmentSubmissionDto>().ReverseMap();
+
+            CreateMap<AssignmentSubmission, AssignmentSubmission>()
+                .ForMember(dest => dest.SubmissionDate, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

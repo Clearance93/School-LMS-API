@@ -14,19 +14,16 @@ namespace OrganizationServices.School
 {
     public class SchoolDashboardServices : ISchoolDashboardServiceInterface
     {
-        private readonly ISchoolDashboardRepositoryInterface _School;
         private readonly ICommunicationMessageInterfaceRepository _Communication;
         private readonly IUnitOfWork _Unit;
         private readonly ILogger<SchoolDashboardServices> _Logger;
         private readonly IMapper _Mapper;
 
-        public SchoolDashboardServices(ISchoolDashboardRepositoryInterface school,
-                                      ICommunicationMessageInterfaceRepository communication,
-                                      IUnitOfWork unit,
-                                      ILogger<SchoolDashboardServices> logger,
-                                      IMapper mapper)
+        public SchoolDashboardServices(ICommunicationMessageInterfaceRepository communication,
+                                       IUnitOfWork unit,
+                                       ILogger<SchoolDashboardServices> logger,
+                                       IMapper mapper)
         {
-            _School = school ?? throw new ArgumentNullException(nameof(school));
             _Communication = communication ?? throw new ArgumentNullException(nameof(_Communication));
             _Unit = unit ?? throw new ArgumentNullException(nameof(unit));
             _Logger = logger;
@@ -51,12 +48,16 @@ namespace OrganizationServices.School
                     }
                 }
 
+                var senderInfo = await GetUserInfoByEmailAsync(dto.SenderEmail);
+
                 var broadcastMessage = _Mapper.Map<Message>(dto);
 
                 broadcastMessage.MessageId = Guid.NewGuid();
                 broadcastMessage.IsRead = false;
                 broadcastMessage.IsDeleted = false;
                 broadcastMessage.TimeStamp = DateTime.Now;
+                broadcastMessage.SenderName = senderInfo.FullName;
+                broadcastMessage.SenderId = senderInfo.UserId;
 
                 await _Unit.Communication.AddAsync(broadcastMessage);
 
@@ -108,7 +109,6 @@ namespace OrganizationServices.School
             }
         }
 
-        // Helper class to hold user information
         private class UserInfo
         {
             public Guid UserId { get; set; }
@@ -235,7 +235,39 @@ namespace OrganizationServices.School
 
         public async Task<SchoolDashboardStatsDto?> GetSchoolDashboardServiceAsync(Guid id)
         {
-            return await _School.GetSchoolDashboardRepositoryAsync(id);
+            return await _Unit.SchoolDashboard.GetSchoolDashboardRepositoryAsync(id);
+        }
+
+        public async Task<IEnumerable<MessagesDto>> GetAllMessagesByIds(Guid organizationId, Guid senderId)
+        {
+            try
+            {
+                if (organizationId != Guid.Empty &&
+                    senderId != Guid.Empty)
+                {
+                    var organization = await _Unit.Organization.GetByIdAsync(organizationId);
+
+                    if (organization == null)
+                    {
+                        throw new OrganizationCore.Exceptions.InvalidOperationException($"The id provided {organizationId} does not exist");
+                    }
+
+                    var messages = await _Unit.Communication.GetAllMessagesByIdsAsync(organizationId, senderId);
+
+                    return _Mapper.Map<IEnumerable<MessagesDto>>(messages);
+                }
+
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<TeacherDashboardViewDto?> GetTeacherDashboardViewAsync(Guid organizationId, Guid teacherId)
+        {
+            return await _Unit.TeacherDashboard.GetTeacherDashboardAsync(organizationId, teacherId);
         }
     }
 }
