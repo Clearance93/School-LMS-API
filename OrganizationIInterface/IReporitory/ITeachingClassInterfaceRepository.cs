@@ -5,5 +5,7 @@ namespace OrganizationIInterface.IReporitory
     public interface ITeachingClassInterfaceRepository : IGenericRepository<TeachingClass>
     {
         Task<IEnumerable<TeachingClass>> GetAllTeachingClassesAsync(Guid organizationId, Guid teacherId);
+
+        Task<TeachingClass?> GetTeachingClassByGradeStreamIdAsync(Guid id);
     }
 }

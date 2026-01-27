@@ -23,7 +23,7 @@ namespace ThutonetOrganizationAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser([FromBody] CreateUserDto dto)
+        public async Task<IActionResult> RegisterUser([FromForm] CreateUserDto dto)
         {
             try
             {
@@ -177,7 +177,6 @@ namespace ThutonetOrganizationAPI.Controllers
         {
             try
             {
-                //var originalToken = FromBase64UrlSafe(token);
 
                 var emailConfirmation = await _User.EmailConfirmationAsync(userId, token);
 
@@ -189,23 +188,19 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
-        //private string FromBase64UrlSafe(string token)
-        //{
-        //    var base64 = token
-        //        .Replace('-', '+')
-        //        .Replace('_', '/');
+        [HttpPut("changepassword")]
+        public async Task<IActionResult> UpdateOldPasswordToNewPassword(PasswordChangeDto dto)
+        {
+            try
+            {
+                var changePassword = await _User.ChangePasswordAsync(dto);
 
-        //    switch (base64.Length % 4)
-        //    {
-        //        case 2: base64 += "==";
-        //            break;
-        //        case 3: base64 += "=";
-        //            break;
-        //    }
-
-        //    var bytes = Convert.FromBase64String(base64);
-
-        //    return Encoding.UTF8.GetString(bytes);
-        //}
+                return Ok(changePassword);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
+            }
+        }
     }
 }

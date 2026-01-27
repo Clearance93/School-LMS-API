@@ -9,6 +9,8 @@ using OrganizationDTO;
 using OrganizationDTO.Dto;
 using OrganizationIInterface.IService;
 using OrganizationModels;
+using System;
+using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -199,6 +201,87 @@ namespace OrganizationServices
                 throw new OrganizationCore.Exceptions.InvalidOperationException("JWT configuration is missing.");
             }
 
+            var roles = userDto.Roles ?? new List<string>();
+
+            if (!roles.Any() && !string.IsNullOrWhiteSpace(userDto.Email))
+            {
+                var appUser = await _UserManager.FindByEmailAsync(userDto.Email);
+
+                if (appUser != null)
+                {
+                    var fetchedRoles = await _UserManager.GetRolesAsync(appUser);
+                    roles = fetchedRoles.ToList();
+                }
+            }
+
+            Guid? organizationId = null;
+            Guid? roleUserId = null;
+
+            if (!string.IsNullOrWhiteSpace(userDto.Email))
+            {
+                if (roles.Contains("Teacher"))
+                {
+                    var teacher = await _UnitOfWork.Teacher.GetTeacherByEmailAsync(userDto.Email!);
+
+                    if (teacher != null)
+                    {
+                        organizationId = teacher.OrganizationSetupId;
+                        roleUserId = teacher.TeacherId;
+                    }
+                }
+                else if (roles.Contains("Student"))
+                {
+                    var student = await _UnitOfWork.Student.GetStudentByEmailAsync(userDto.Email!);
+
+                    if (student != null)
+                    {
+                        organizationId = student.OrganizationSetupId;
+                        roleUserId = student.StudentId;
+                    }
+                }
+                else if (roles.Contains("Admin"))
+                {
+                    var admin = await _UnitOfWork.Admin.GetAdminByEmail(userDto.Email!);
+
+                    if (admin != null)
+                    {
+                        organizationId = admin.OrganizationSetupId;
+                        roleUserId = admin.AdminId;
+                    }
+                }
+                else if (roles.Contains("Learner"))
+                {
+                    var learner = await _UnitOfWork.Learner.GetLearnerByEmailAsync(userDto.Email!);
+
+                    if (learner != null)
+                    {
+                        organizationId = learner.OrganizationSetupId;
+                        roleUserId = learner.LearnerId;
+                    }
+                }
+                else if (roles.Contains("Guest"))
+                {
+                    var guest = await _UnitOfWork.Guests.GetGuestByEmailAsync(userDto.Email!);
+
+                    if (guest != null)
+                    {
+                        organizationId = guest.OrganizationSetupId;
+                        roleUserId = guest.GuestId;
+                    }
+                }
+                else if (roles.Contains("StuffMember"))
+                {
+                    var stuff = await _UnitOfWork.StuffMember.GetStuffMemberByEmailAsync(userDto.Email!);
+
+                    if (stuff != null)
+                    {
+                        organizationId = stuff.OrganizationSetupId;
+                        roleUserId = stuff.StuffMemberId;
+                    }
+                }
+
+            }
+
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userDto.Email),
@@ -209,6 +292,21 @@ namespace OrganizationServices
                 new Claim("extension_firstName", userDto.FirstName ?? string.Empty),
                 new Claim("extension_lastName", userDto.LastName ?? string.Empty)
             };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            if (organizationId.HasValue)
+            {
+                claims.Add(new Claim("organizationId", organizationId.Value.ToString()));
+            }
+
+            if (roleUserId.HasValue)
+            {
+                claims.Add(new Claim("roleUserId", roleUserId.Value.ToString()));
+            }
 
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
@@ -290,7 +388,7 @@ namespace OrganizationServices
 
         public async Task<ResponseUserDto> AuthenticateUserAsync(UserLoginDto dto)
         {
-            var exisitingUser = await _UnitOfWork.Users.GetUserByEmailAsync(dto.Email);
+            var exisitingUser = await _UnitOfWork.Users.GetUserByEmailAsync(dto.Email!);
 
             if (exisitingUser == null)
             {
@@ -308,7 +406,7 @@ namespace OrganizationServices
 
             var hashedPassword = user.Password;
 
-            var results = passwordHasher.VerifyHashedPassword(user, hashedPassword, dto.Password);
+            var results = passwordHasher.VerifyHashedPassword(user, hashedPassword!, dto.Password!);
 
             if (results == PasswordVerificationResult.Failed)
             {
@@ -391,6 +489,37 @@ namespace OrganizationServices
 
             await _UnitOfWork.SaveChangeAsync();
 
+            return true;
+        }
+
+        public async Task<bool> ChangePasswordAsync(PasswordChangeDto dto)
+        {
+            var existingUser = await _UnitOfWork.Users.GetUserByEmailAsync(dto.Email!);
+            
+            if (existingUser == null)
+            {
+                throw new OrganizationCore.Exceptions.InvalidOperationException($"User with the given email: {dto.Email} does not exist.");
+            }
+
+            var passwordHasher = new PasswordHasher<ApplicationUser>();
+
+            var hashedPassword = existingUser.Password;
+            
+            var results = passwordHasher.VerifyHashedPassword(existingUser, hashedPassword!, dto.CurrentPassword!);
+
+            if (results == PasswordVerificationResult.Failed)
+            {
+                throw new AccountLockedException("The current password is incorrect, we cannot change your password");
+            }
+
+            var newHashedPassword = passwordHasher.HashPassword(existingUser, dto.NewPassword!);
+
+            existingUser.Password = newHashedPassword;
+
+            _UnitOfWork.Users.Update(existingUser);
+            
+            await _UnitOfWork.SaveChangeAsync();
+            
             return true;
         }
     }

@@ -21,5 +21,7 @@ namespace OrganizationIInterface.IService
         Task<string> GeneratePasswordResetTOkenRepositoryAsnc(string email);
 
         Task<bool> EmailConfirmationAsync(string userId, string token);
+
+        Task<bool> ChangePasswordAsync(PasswordChangeDto dto);
     }
 }

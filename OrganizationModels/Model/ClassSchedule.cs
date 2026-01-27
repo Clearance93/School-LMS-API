@@ -20,6 +20,8 @@ namespace OrganizationModels.Model
 
         public ScheduleStatus? Status { get; set; }
 
+        public string? ClassRoomNumber { get; set; }
+
         public Guid? TeachingClassId {  get; set; }
         public TeachingClass? TeachingClass { get; set; }
 

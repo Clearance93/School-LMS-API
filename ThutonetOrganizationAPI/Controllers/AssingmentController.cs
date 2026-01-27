@@ -31,6 +31,21 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("getTeacherAssignments/{teacherId}")]
+        public async Task<IActionResult> GetAllTeachersAssignments(Guid teacherId)
+        {
+            try
+            {
+                var assignments = await _Assignment.GetAllAssignmentsCreatedByTeacherAsync(teacherId);
+
+                return Ok(assignments);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception($"{exception.Message}", exception);
+            }
+        }
+
         [HttpPost("addAssignmentGrades")]
         public async Task<IActionResult> AddAssignmentSubmissionGrades(AssignmentGradesDto dto)
         {

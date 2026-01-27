@@ -4,5 +4,6 @@ namespace OrganizationIInterface.IReporitory.Assignments
 {
     public interface IAssignmentRepositoryInterface : IGenericRepository<Assignment>
     {
+        Task<IEnumerable<Assignment>> GetAllTeacherAssignmentCreatedAsync(Guid teacherId);
     }
 }

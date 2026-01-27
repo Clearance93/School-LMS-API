@@ -105,5 +105,20 @@ namespace ThutonetOrganizationAPI.Controllers
                 throw new Exception(ex.Message, ex);
             }
         }
+
+        [HttpGet("getAllStreams/{teacherId}")]
+        public async Task<IActionResult> GetAllTeacherGradeClassStreams(Guid teacherId)
+        {
+            try
+            {
+                var grades = await _Teacher.GetGradeStreamByTeacgerIdAsync(teacherId);
+
+                return Ok(grades);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
     }
 }

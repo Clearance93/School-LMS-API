@@ -22,6 +22,7 @@ namespace OrganizationCore
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.ProfileImage, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<UpdateUserDto, ApplicationUser>()
@@ -216,7 +217,6 @@ namespace OrganizationCore
             CreateMap<Message, BroadcastMessageDto>().ReverseMap();
 
             CreateMap<Message, MessagesDto>()
-                .ForMember(dest => dest.TimeStamp, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<Message, BroadcastMessageDto>().ReverseMap();
@@ -267,6 +267,27 @@ namespace OrganizationCore
 
             CreateMap<AssignmentSubmission, AssignmentSubmission>()
                 .ForMember(dest => dest.SubmissionDate, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<NewClass, NewClassDto>().ReverseMap();
+
+            CreateMap<NewClass, NewClassDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<ScheduledWorkshop, ScheduledWorkshopDto>().ReverseMap();
+
+            CreateMap<ScheduledWorkshop, ScheduledWorkshopDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.DeletedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.IsDeleted, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<LeadershipProgram, LeadershipProgramDto>().ReverseMap();
+
+            CreateMap<LeadershipProgram, LeadershipProgramDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ReverseMap();
         }
     }

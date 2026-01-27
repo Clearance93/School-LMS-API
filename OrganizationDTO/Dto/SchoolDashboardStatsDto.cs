@@ -14,6 +14,8 @@
 
         public int TotalStaff { get; set; }
 
+        public int TotalCourseStreams { get; set; }
+
         public int TotalGuests { get; set; }   
         
         public string? TypeOfService { get; set; }

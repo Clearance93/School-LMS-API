@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using OrganizationCore.UnitOfWork;
 using OrganizationDTO.Dto;
+using OrganizationDTO.Dto.Settings;
+using OrganizationEnums;
 using OrganizationIInterface.IService;
 using OrganizationModels.Model;
 
@@ -40,11 +42,11 @@ namespace OrganizationServices
                     throw new OrganizationCore.Exceptions.InvalidOperationException($"The value given {dto.OrganizationId} or {dto.TeacherId} are invalid");
                 }
 
-                var teachingClass = await _Unit.TeachingClass.GetByIdAsync(dto.TeachingClassId);
+                var teachingClass = await _Unit.TeachingClass.GetTeachingClassByGradeStreamIdAsync(dto.GradeStreamId);
 
                 if (teachingClass == null)
                 {
-                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The teaching class was not found");
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The teaching class wit grade stream Id {dto.GradeStreamId} was not found");
                 }
 
                 var attendanceSession = await _Unit.Teacher.GetTeacherByOrganization(dto.OrganizationId, dto.TeacherId);
@@ -52,6 +54,8 @@ namespace OrganizationServices
                 var classSchedule = _Mapper.Map<ClassSchedule>(dto);
 
                 classSchedule.ClassScheduleId = Guid.NewGuid();
+                classSchedule.Status = ScheduleStatus.upcoming;
+                classSchedule.TeachingClassId = teachingClass.TeachingClassId;
 
                 await _Unit.ClassSchedule.AddAsync(classSchedule);
 
@@ -181,6 +185,27 @@ namespace OrganizationServices
             var allTeachingClasses = await _Unit.TeachingClass.GetAllTeachingClassesAsync(organizationId, teacherId);
 
             return _Mapper.Map<IEnumerable<TeachingClassDto>>(allTeachingClasses);
+        }
+
+        public async Task<IEnumerable<GradeWithStreamDto>> GetGradeStreamByTeacgerIdAsync(Guid teacherId)
+        {
+            try
+            {
+                var teacher = await _Unit.Teacher.GetByIdAsync(teacherId);
+
+                if (teacher == null)
+                {
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The Id: {teacherId} does not match any teacher");
+                }
+
+                var allStreams = await _Unit.GradeStream.GetAllTeacherGradeStreamsAsync(teacherId);
+
+                return _Mapper.Map<IEnumerable<GradeWithStreamDto>>(allStreams);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task RebuildDailyAttendanceOverViewAsync(Guid organizationId, Guid teacherId, DateTime date)

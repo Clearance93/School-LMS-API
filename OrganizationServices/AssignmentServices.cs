@@ -110,5 +110,26 @@ namespace OrganizationServices
                 throw;
             }
         }
+
+        public async Task<IEnumerable<AssignmentDto>> GetAllAssignmentsCreatedByTeacherAsync(Guid teacherId)
+        {
+            try
+            {
+                var teacher = await _Unit.Teacher.GetByIdAsync(teacherId);
+
+                if (teacher == null)
+                {
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The Id: {teacherId} provided does not exists");
+                }
+
+                var assignments = await _Unit.Assignments.GetAllTeacherAssignmentCreatedAsync(teacherId);
+
+                return _Mapper.Map<IEnumerable<AssignmentDto>>(assignments);    
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

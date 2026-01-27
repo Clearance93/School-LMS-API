@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrganizationDTO
 {
@@ -21,7 +22,7 @@ namespace OrganizationDTO
         public string? Role { get; set; }
 
         [Required]
-        public string? ProfileImage { get; set; }
+        public IFormFile? ProfileImage { get; set; }
 
         public DateTime CreatedAt { get; set; }
     }
