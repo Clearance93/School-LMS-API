@@ -19,5 +19,10 @@ namespace OrganizationRepository
                                                            t.TeacherId == teacherId)
                                                 .ToListAsync();
         }
+
+        public async Task<TeachingClass?> GetTeachingClassByGradeStreamIdAsync(Guid id)
+        {
+            return await _Context.TeachingClass.FirstOrDefaultAsync(t => t.GradeStreamId == id);
+        }
     }
 }

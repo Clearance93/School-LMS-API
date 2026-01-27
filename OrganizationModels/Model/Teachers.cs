@@ -21,6 +21,12 @@ namespace OrganizationModels.Model
 
         public DateTime CreatedAt { get; set; }
 
+        public long? PhoneNumber { get; set; }
+
+        public string? Department { get; set; }
+
+        public string? Qualification { get; set; }
+
         public DateTime UpdatedAt { get; set; }
 
         public Guid OrganizationSetupId { get; set; }

@@ -20,5 +20,11 @@ namespace OrganizationRepository.Settings
 
             return gradeStreams;
         }
+
+        public async Task<IEnumerable<GradeStream>> GetAllTeacherGradeStreamsAsync(Guid teacherId)
+        {
+            return await _Context.GradeStreams.Where(g => g.TeacherId == teacherId)
+                                              .ToListAsync() ;
+        }
     }
 }

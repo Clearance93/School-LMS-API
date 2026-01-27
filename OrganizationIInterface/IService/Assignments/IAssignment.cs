@@ -9,5 +9,7 @@ namespace OrganizationIInterface.IService.Assignments
         Task<bool> AddAssignmentGradesAsync(AssignmentGradesDto dto);
 
         Task<bool> AssignmentsSubmissionAsync(AssignmentSubmissionDto dto);
+
+        Task<IEnumerable<AssignmentDto>> GetAllAssignmentsCreatedByTeacherAsync(Guid teacherId);
     }
 }

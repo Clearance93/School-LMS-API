@@ -12,6 +12,8 @@ namespace OrganizationDTO.Dto
 
         public TimeOnly EndTime { get; set; }
 
+        public string? ClassRoomNumber { get; set; }
+
         public Guid GradeStreamId { get; set; }
 
         public ScheduleStatus Status { get; set; }

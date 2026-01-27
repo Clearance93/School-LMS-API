@@ -1,4 +1,5 @@
 ﻿using OrganizationDTO.Dto;
+using OrganizationDTO.Dto.Settings;
 
 namespace OrganizationIInterface.IService
 {
@@ -9,6 +10,8 @@ namespace OrganizationIInterface.IService
         Task<bool> CreateStudentAttendance(StudentAttendanceDto dto);
 
         Task<bool> CreateTeachingClass(TeachingClassDto dto);
+
+        Task<IEnumerable<GradeWithStreamDto>> GetGradeStreamByTeacgerIdAsync(Guid teacherId);
 
         Task<IEnumerable<ClassScheduleDto>> GetAllClassSchedulesAsync(Guid organizationId, Guid teacherId);
 

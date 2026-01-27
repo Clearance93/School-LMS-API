@@ -15,6 +15,8 @@ namespace OrganizationModels.Model
 
         public int TotalStudents { get; set; }
 
+        public string? ClassRoomNumber { get; set; }
+
         public Guid OrganizationId { get; set; }
 
         public Guid TeacherId {  get; set; }

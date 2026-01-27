@@ -68,6 +68,18 @@ namespace OrganizationCore.UnitOfWork
 
         public ISchoolDashboardRepositoryInterface SchoolDashboard { get; private set; }
 
+        public INewClassRepositoryInterface NewClass { get; private set; }
+
+        public IClassPerformanceViewRepositoryInterface ClassPerformance { get; private set; }
+
+        public IAttendanceDailyToMonthlyRepositoryInterface MonthlyAttendance { get; private set; }
+
+        public IPasswordChangeRepositoryInterface ChangePassword { get; private set; }
+
+        public IScheduledWorkRpositoryInterface ScheduledWorkshop { get; private set; }
+
+        public ILeadershipPropgramRepositoryInterface LeadershipPropgram { get; private set; }
+
         public UnitOfWork(ApplicationDbContext context,
                           IUSerRepositoryInterface user,
                           IOrganizationRepositoryInterface organization,
@@ -97,7 +109,13 @@ namespace OrganizationCore.UnitOfWork
                           IAssignmentRepositoryInterface assignment,
                           IAttendanceOverViewRepositoryInterface attendanceOverview,
                           ITeacherDashboardViewRepositoryInterface teacherDashboard,
-                          ISchoolDashboardRepositoryInterface schoolDashboard)
+                          ISchoolDashboardRepositoryInterface schoolDashboard,
+                          INewClassRepositoryInterface newClass,
+                          IClassPerformanceViewRepositoryInterface classPerformance,
+                          IAttendanceDailyToMonthlyRepositoryInterface monthlyAttendance,
+                          IPasswordChangeRepositoryInterface changePassword,
+                          IScheduledWorkRpositoryInterface scheduledWorkshop,
+                          ILeadershipPropgramRepositoryInterface leadershipPropgram)
         {
             _Context = context;
             Users = user ?? throw new ArgumentNullException(nameof(user));
@@ -129,6 +147,12 @@ namespace OrganizationCore.UnitOfWork
             AttendanceOverview = attendanceOverview ?? throw new ArgumentNullException(nameof(attendanceOverview));
             TeacherDashboard = teacherDashboard ?? throw new ArgumentNullException(nameof(teacherDashboard));
             SchoolDashboard = schoolDashboard ?? throw new ArgumentNullException(nameof(schoolDashboard));
+            NewClass = newClass ?? throw new ArgumentNullException(nameof(newClass));
+            ClassPerformance = classPerformance ?? throw new ArgumentNullException(nameof(classPerformance));
+            MonthlyAttendance = monthlyAttendance ?? throw new ArgumentNullException(nameof(monthlyAttendance));
+            ChangePassword = changePassword ?? throw new ArgumentNullException(nameof(changePassword));
+            ScheduledWorkshop = scheduledWorkshop ?? throw new ArgumentNullException(nameof(scheduledWorkshop));
+            LeadershipPropgram = leadershipPropgram ?? throw new ArgumentNullException(nameof(leadershipPropgram));
         }
 
         public void Dispose()

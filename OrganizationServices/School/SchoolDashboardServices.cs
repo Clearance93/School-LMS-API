@@ -16,17 +16,14 @@ namespace OrganizationServices.School
     {
         private readonly ICommunicationMessageInterfaceRepository _Communication;
         private readonly IUnitOfWork _Unit;
-        private readonly ILogger<SchoolDashboardServices> _Logger;
         private readonly IMapper _Mapper;
 
         public SchoolDashboardServices(ICommunicationMessageInterfaceRepository communication,
                                        IUnitOfWork unit,
-                                       ILogger<SchoolDashboardServices> logger,
                                        IMapper mapper)
         {
             _Communication = communication ?? throw new ArgumentNullException(nameof(_Communication));
             _Unit = unit ?? throw new ArgumentNullException(nameof(unit));
-            _Logger = logger;
             _Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 

@@ -482,6 +482,9 @@ namespace OrganizationData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ClassRoomNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateOnly?>("Date")
                         .HasColumnType("date");
 
@@ -648,6 +651,44 @@ namespace OrganizationData.Migrations
                     b.ToTable("Guests");
                 });
 
+            modelBuilder.Entity("OrganizationModels.Model.LeadershipProgram", b =>
+                {
+                    b.Property<Guid>("ProgrameId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AdminId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaxParticipants")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProgramName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProgramType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("ProgrameId");
+
+                    b.ToTable("LeadershipProgram");
+                });
+
             modelBuilder.Entity("OrganizationModels.Model.Learners", b =>
                 {
                     b.Property<Guid>("LearnerId")
@@ -692,6 +733,46 @@ namespace OrganizationData.Migrations
                     b.HasIndex("OrganizationSetupId");
 
                     b.ToTable("Learners");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.NewClass", b =>
+                {
+                    b.Property<Guid>("NewClassId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassRoom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("GradeStreamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActiveClass")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("NewClassId");
+
+                    b.HasIndex("GradeStreamId");
+
+                    b.ToTable("NewClass");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.OrganizationSetup", b =>
@@ -776,6 +857,68 @@ namespace OrganizationData.Migrations
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("RegistrrationLink");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.ScheduledWorkshop", b =>
+                {
+                    b.Property<Guid>("ScheduledWorkshopId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AdminId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaxParticipants")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MeetingUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Privacy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoomId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeOnly>("ScheduleTime")
+                        .HasColumnType("time");
+
+                    b.Property<DateOnly>("ScheduledDate")
+                        .HasColumnType("date");
+
+                    b.Property<bool?>("Success")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TimeDuration")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WorkShopDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkshopName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ScheduledWorkshopId");
+
+                    b.ToTable("ScheduledWorkshop");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.Settings.CourseStreams", b =>
@@ -1133,6 +1276,9 @@ namespace OrganizationData.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -1147,6 +1293,12 @@ namespace OrganizationData.Migrations
 
                     b.Property<Guid>("OrganizationSetupId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<long?>("PhoneNumber")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Qualification")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TeacherEmail")
                         .HasColumnType("nvarchar(max)");
@@ -1169,6 +1321,9 @@ namespace OrganizationData.Migrations
                     b.Property<Guid>("TeachingClassId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ClassRoomNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("GradeStreamId")
                         .HasColumnType("uniqueidentifier");
@@ -1339,6 +1494,17 @@ namespace OrganizationData.Migrations
                         .IsRequired();
 
                     b.Navigation("OrganizationSetup");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.NewClass", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.Settings.GradeStream", "GradeStream")
+                        .WithMany()
+                        .HasForeignKey("GradeStreamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GradeStream");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.RegistrrationLink", b =>

@@ -9,6 +9,12 @@
 
         public string? TeacherEmail { get; set; }
 
+        public long? PhoneNumber { get; set; }
+
+        public string? Department { get; set; }
+
+        public string? Qualification { get; set; }
+
         public string? TeacherProfilePicture { get; set; }
 
         public bool IsDeleted { get; set; }

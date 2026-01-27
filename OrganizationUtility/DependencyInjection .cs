@@ -30,6 +30,8 @@ namespace OrganizationUtility
         public static IServiceCollection AddApplicationDependencies(this IServiceCollection services,
                                                                          IConfiguration configuration)
         {
+            services.AddHttpClient();
+
             services.AddSingleton(provider =>
             {
                 var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
@@ -120,6 +122,17 @@ namespace OrganizationUtility
 
             services.AddScoped<IAttendanceOverViewRepositoryInterface, AttendanceOverviewRepository>();
             services.AddScoped<ITeacherDashboardViewRepositoryInterface, TeacherDashboardRepository>();
+            services.AddScoped<INewClassRepositoryInterface, NewClassRepository>();
+            services.AddScoped<INewClassServicesInterface, NewClassServices>();
+
+            services.AddScoped<IClassPerformanceViewRepositoryInterface, ClassPerformanceViewRepository>();
+            services.AddScoped<IAttendanceDailyToMonthlyRepositoryInterface, MonthlyAttendanceSummaryRepository>();
+            services.AddScoped<IPasswordChangeRepositoryInterface, ChangePasswordRepository>();
+
+            services.AddScoped<IScheduledWorkRpositoryInterface, ScheduledWorkshopRepository>();
+            services.AddScoped<IScheduledWorkshopServiceInterface, ScheduledMettingsService>();
+            services.AddScoped<ILeadershipPropgramRepositoryInterface, LeadershipProgramRepository>();
+            services.AddScoped<ILeadershipPropgramServirceInterface, LeadershipProgramsService>();
 
             return services;
         }

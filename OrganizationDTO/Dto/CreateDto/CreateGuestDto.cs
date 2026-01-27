@@ -1,4 +1,6 @@
-﻿namespace OrganizationDTO.Dto.CreateDto
+﻿using Microsoft.AspNetCore.Http;
+
+namespace OrganizationDTO.Dto.CreateDto
 {
     public class CreateGuestDto
     {
@@ -10,7 +12,7 @@
 
         public string? GuestEmail { get; set; }
 
-        public string? GuestProfilePicture { get; set; }
+        public IFormFile? GuestProfilePicture { get; set; }
 
         public string? Password { get; set; }
 

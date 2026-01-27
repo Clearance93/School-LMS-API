@@ -65,6 +65,18 @@ namespace OrganizationCore.UnitOfWork
 
         ISchoolDashboardRepositoryInterface SchoolDashboard { get; }
 
+        INewClassRepositoryInterface NewClass { get; }
+
+        IClassPerformanceViewRepositoryInterface ClassPerformance { get; }
+
+        IAttendanceDailyToMonthlyRepositoryInterface MonthlyAttendance { get; }
+
+        IPasswordChangeRepositoryInterface ChangePassword { get; }
+
+        IScheduledWorkRpositoryInterface ScheduledWorkshop { get; }
+
+        ILeadershipPropgramRepositoryInterface LeadershipPropgram { get; }
+
         Task<int> SaveChangeAsync();
     }
 }
