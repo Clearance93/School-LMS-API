@@ -13,9 +13,10 @@ namespace OrganizationRepository.Settings
             _Context = context;
         }
 
-        public async Task<SchoolSubjects?> GetSubjectBySubjectNameAsyc(string subjectName)
+        public async Task<SchoolSubjects?> GetSubjectBySubjectNameAsyc(Guid gradeId, string subjectName)
         {
-            return await _Context.SchoolSubjects.FirstOrDefaultAsync(s => s.SubjectName == subjectName);
+            return await _Context.SchoolSubjects.FirstOrDefaultAsync(s => s.SubjectName == subjectName && 
+                                                                          s.GradeId == gradeId);
         }
     }
 }

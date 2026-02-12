@@ -28,7 +28,7 @@ namespace OrganizationServices.School.Settings
 
         public async Task<bool> AddSchoolSubjectAsync(SchoolSubjectDto dto)
         {
-            var subject = await _Subject.GetSubjectBySubjectNameAsyc(dto.SubjectName!);
+            var subject = await _Subject.GetSubjectBySubjectNameAsyc(dto.GradeId, dto.SubjectName!);
 
             if (subject != null)
             {

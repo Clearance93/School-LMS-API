@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OrganizationDTO.Dto;
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.UpdateDto;
 using OrganizationIInterface.IService;
@@ -139,6 +140,21 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("allStudentSubjectById/{studentId}")]
+        public async Task<IActionResult> GettingAllStudentByStudentId(Guid studentId)
+        {
+            try
+            {
+                var allStuSub = await _Student.GetAllStudentSubjectByStudentIdAsync(studentId);
+
+                return Ok(allStuSub);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        } 
+
         [HttpPut("update-student/{id}")]
         public async Task<IActionResult> UpdatingStudent(Guid id, [FromBody] UpdateStudentDto dto)
         {
@@ -151,6 +167,21 @@ namespace ThutonetOrganizationAPI.Controllers
                 _Logger.LogError($"Failed to update {dto.FirstName} {dto.LastName}. {exception.Message}");
 
                 throw new Exception(exception.Message);
+            }
+        }
+
+        [HttpGet("studentTimeTable/{studentId}")]
+        public async Task<IActionResult> StudentScheduledTimeTable(Guid studentId)
+        {
+            try
+            {
+                var studScheduled = await _Student.StudentScheduledTimetableAsync(studentId);
+
+                return Ok(studScheduled);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
             }
         }
 
@@ -213,6 +244,51 @@ namespace ThutonetOrganizationAPI.Controllers
                 throw new Exception(exception.Message);
             }
         }
+
+        [HttpPost("addStudentSubject")]
+        public async Task<IActionResult> AddStudentSubjectPerGrade(StudentGradeDto dto)
+        {
+            try
+            {
+                var studentSub = await _Student.AddStudentSubject(dto);
+
+                return Ok(studentSub);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
+            }
+        }
+
+        [HttpGet("organizationSub/{organizationId}")]
+        public async Task<IActionResult> GetOrganizationSubject(Guid organizationId)
+        {
+            try
+            {
+                var orgSub = await _Student.GetAllOrganizationStudentGrades(organizationId);
+
+                return Ok(orgSub);  
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
+            }
+        }
+
+        [HttpGet("teacherSubject/{teacherId}")]
+        public async Task<IActionResult> GetAllTeacherTeachingSubject(Guid teacherId)
+        {
+            try
+            {
+                var teacherSub = await _Student.GetAllTeacherStudents(teacherId);
+
+                return Ok(teacherSub);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
+            }
+        } 
 
         [HttpGet("getAllStudents/{organizationId}")]
         public async Task<IActionResult> AllStudents(Guid organizationId)
@@ -361,6 +437,21 @@ namespace ThutonetOrganizationAPI.Controllers
                 _Logger.LogError($"Failed to remove the user: {exception.Message}");
 
                 throw new Exception(exception.Message);
+            }
+        }
+
+        [HttpDelete("removeSub/{studentGradeId}")]
+        public async Task<IActionResult> RemoveStudentSubject(Guid studentGradeId)
+        {
+            try
+            {
+                var removeSub = await _Student.DeleteStudentSubjectAsync(studentGradeId);
+
+                return Ok(removeSub);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
             }
         }
 

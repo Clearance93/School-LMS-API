@@ -77,6 +77,16 @@ namespace OrganizationCore.UnitOfWork
 
         ILeadershipPropgramRepositoryInterface LeadershipPropgram { get; }
 
+        IStudentSubjectRepositoryInterface StudentSubject { get; }
+
+        IStudentScheduledTimetableRepositoryInterface StudentScheduledTimeTable { get; }
+
+        IAcademicProgressRepositoryInterface AcademicProgress { get; }
+
+        IStudentAttendanceOverviewRepositoryInterface StudentAttendanceOverview { get; }
+
+        IStudentDashboardRepositoryInterface StudentDashboard { get; }
+
         Task<int> SaveChangeAsync();
     }
 }

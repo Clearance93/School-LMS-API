@@ -1,4 +1,5 @@
-﻿using OrganizationModels.Model.Settings;
+﻿using OrganizationDTO.Dto;
+using OrganizationModels.Model.Settings;
 
 namespace OrganizationIInterface.IReporitory.Schools
 {
@@ -7,5 +8,7 @@ namespace OrganizationIInterface.IReporitory.Schools
         Task<IEnumerable<GradeStream>> GetAllGradeStreams(Guid id);
 
         Task<IEnumerable<GradeStream>> GetAllTeacherGradeStreamsAsync(Guid teacherId);
+
+        Task<IEnumerable<GradeStreamTeachingClassDto?>> GetAllStreamGradesByGradeIdAsync(Guid gradeId);
     }
 }

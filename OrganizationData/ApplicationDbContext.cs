@@ -73,5 +73,13 @@ namespace OrganizationData
         public DbSet<ScheduledWorkshop> ScheduledWorkshop { get; set; }
 
         public DbSet<LeadershipProgram> LeadershipProgram { get; set; }
+
+        public DbSet<TaskSubmission> TaskSubmission {  get; set; }
+
+        public DbSet<StudentsGrade> StudentsGrade {  get; set; }
+
+        public DbSet<AcademicProgress> AcademicProgress {  get; set; }
+
+        public DbSet<StudentAttendanceOverview> StudentAttendanceOverview {  get; set; }
     }
 }

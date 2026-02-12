@@ -7,11 +7,11 @@ namespace OrganizationModels.Model.Settings
         [Key]
         public Guid SubjectId { get; set; }
 
-        public Guid CourseStreamId {  get; set; }
-        public CourseStreams? CourseStream { get; set; }
-
         public string? SubjectName { get; set; }
 
-        public string? GradeLevel { get; set; }
+        public Guid GradeId { get; set; }
+        public Grade? Grade { get; set; }
+
+        public Guid OrganizationId { get; set; }
     }
 }

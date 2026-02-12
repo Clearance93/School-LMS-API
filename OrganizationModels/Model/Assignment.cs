@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OrganizationModels.Model.Settings;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrganizationModels.Model
 {
@@ -20,6 +21,7 @@ namespace OrganizationModels.Model
         public int AssignmentMarks { get; set; }
 
         public Guid GradeStreamId { get; set; }
+        public GradeStream? GradeStream { get; set; }
 
         public string? AssignmentSubject { get; set; }
 

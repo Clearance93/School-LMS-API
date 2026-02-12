@@ -13,5 +13,11 @@
         public string? AssignmentPdfSubmission {  get; set; }
 
         public DateTime SubmissionDate { get; set; }
+
+        public bool IsPending { get; set; }
+
+        public bool IsSubmitted { get; set; }
+
+        public bool IsCompleted { get; set; }
     }
 }

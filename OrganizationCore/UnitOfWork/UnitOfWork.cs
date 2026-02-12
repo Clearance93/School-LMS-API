@@ -3,7 +3,6 @@ using OrganizationIInterface.IReporitory;
 using OrganizationIInterface.IReporitory.Assignments;
 using OrganizationIInterface.IReporitory.Schools;
 using OrganizationIInterface.IReporitory.Schools.Settings;
-using OrganizationIInterface.IService;
 
 namespace OrganizationCore.UnitOfWork
 {
@@ -80,7 +79,17 @@ namespace OrganizationCore.UnitOfWork
 
         public ILeadershipPropgramRepositoryInterface LeadershipPropgram { get; private set; }
 
-        public UnitOfWork(ApplicationDbContext context,
+        public IStudentSubjectRepositoryInterface StudentSubject { get; set; }
+
+        public IStudentScheduledTimetableRepositoryInterface StudentScheduledTimeTable { get; private set; }
+
+        public IAcademicProgressRepositoryInterface AcademicProgress { get; private set; }
+
+        public IStudentAttendanceOverviewRepositoryInterface StudentAttendanceOverview { get; private set; }
+
+        public IStudentDashboardRepositoryInterface StudentDashboard { get; private set; }
+
+        public UnitOfWork(ApplicationDbContext context, 
                           IUSerRepositoryInterface user,
                           IOrganizationRepositoryInterface organization,
                           IAdminRepositoryInterface admin,
@@ -115,12 +124,17 @@ namespace OrganizationCore.UnitOfWork
                           IAttendanceDailyToMonthlyRepositoryInterface monthlyAttendance,
                           IPasswordChangeRepositoryInterface changePassword,
                           IScheduledWorkRpositoryInterface scheduledWorkshop,
-                          ILeadershipPropgramRepositoryInterface leadershipPropgram)
+                          ILeadershipPropgramRepositoryInterface leadershipPropgram,
+                          IStudentSubjectRepositoryInterface studentSubject,
+                          IStudentScheduledTimetableRepositoryInterface studentScheduledTimetable,
+                          IStudentAttendanceOverviewRepositoryInterface studentAttendanceOverview,
+                          IAcademicProgressRepositoryInterface academicProgress,
+                          IStudentDashboardRepositoryInterface studentDashboard)
         {
             _Context = context;
             Users = user ?? throw new ArgumentNullException(nameof(user));
             Organization = organization ?? throw new ArgumentNullException(nameof(organization));
-            Admin = admin ?? throw new ArgumentNullException(nameof(organization));
+            Admin = admin ?? throw new ArgumentNullException(nameof(admin));
             Student = student ?? throw new ArgumentNullException(nameof(student));
             Learner = learner ?? throw new ArgumentNullException(nameof(learner));
             StuffMember = stuffMember ?? throw new ArgumentNullException(nameof(stuffMember));
@@ -153,6 +167,11 @@ namespace OrganizationCore.UnitOfWork
             ChangePassword = changePassword ?? throw new ArgumentNullException(nameof(changePassword));
             ScheduledWorkshop = scheduledWorkshop ?? throw new ArgumentNullException(nameof(scheduledWorkshop));
             LeadershipPropgram = leadershipPropgram ?? throw new ArgumentNullException(nameof(leadershipPropgram));
+            StudentSubject = studentSubject ?? throw new ArgumentNullException(nameof(studentSubject));
+            StudentScheduledTimeTable = studentScheduledTimetable ?? throw new ArgumentNullException(nameof(studentScheduledTimetable));
+            AcademicProgress = academicProgress ?? throw new ArgumentNullException(nameof(academicProgress));
+            StudentAttendanceOverview = studentAttendanceOverview ?? throw new ArgumentNullException(nameof(studentAttendanceOverview));
+            StudentDashboard = studentDashboard ?? throw new ArgumentNullException(nameof(studentDashboard));
         }
 
         public void Dispose()

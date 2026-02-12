@@ -9,6 +9,7 @@ using OrganizationIInterface.IReporitory.Schools;
 using OrganizationIInterface.IService.School;
 using OrganizationModels.Model;
 using OrganizationModels.Model.Communication;
+using System.Text.RegularExpressions;
 
 namespace OrganizationServices.School
 {
@@ -265,6 +266,36 @@ namespace OrganizationServices.School
         public async Task<TeacherDashboardViewDto?> GetTeacherDashboardViewAsync(Guid organizationId, Guid teacherId)
         {
             return await _Unit.TeacherDashboard.GetTeacherDashboardAsync(organizationId, teacherId);
+        }
+
+        public async Task<IEnumerable<StudentDashboardDto>> GetStudentDashboardServiceAsync(Guid studentId)
+        {
+            var stuGrade = await _Unit.StudentSubject.GetStudentByStudentId(studentId);
+
+            if (stuGrade == null)
+            {
+                throw new OrganizationCore.Exceptions.InvalidOperationException($"The StudentId: {studentId} provided is invalid.");
+            }
+
+            var gradeName = RegexPatten(stuGrade.StreamName);
+
+            var grade = await _Unit.Grade.GetGradeByGradeStreamIdAsync(gradeName);
+
+            if (grade == null)
+            {
+                throw new OrganizationCore.Exceptions.InvalidOperationException($"The Stream Grade Id: {stuGrade!.StreamGradeId} provided is invalid.");
+            }
+
+            return await _Unit.StudentDashboard.GetStudentDashboardAsync(studentId, gradeName);
+        }
+
+        private string RegexPatten(string? streamName)
+        {
+            var input = streamName ?? string.Empty;
+
+            var results = Regex.Replace(input, @"\s?[A-Za-z]$", "");
+
+            return results;
         }
     }
 }

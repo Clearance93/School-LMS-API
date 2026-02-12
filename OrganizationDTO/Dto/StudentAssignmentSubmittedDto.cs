@@ -1,0 +1,21 @@
+﻿namespace OrganizationDTO.Dto
+{
+    public class StudentAssignmentSubmittedDto
+    {
+        public Guid StudentId { get; set; }
+
+        public Guid AssignmentId {  get; set; }
+
+        public string? StudentFullNames { get; set; }
+
+        public string? StudentEmail { get; set; }
+        
+        public string? AssignmentTitle { get; set; }
+
+        public string? AssignmentDescription { get; set; }
+
+        public string? StreamName { get; set; }
+
+        public string? Subject { get; set; }
+    }
+}

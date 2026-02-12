@@ -12,6 +12,8 @@
 
         public string? ClassRoomNumber { get; set; }
 
+        public string? GradeStreamName {  get; set; }
+
         public Guid OrganizationId { get; set; }
 
         public Guid TeacherId { get; set; }

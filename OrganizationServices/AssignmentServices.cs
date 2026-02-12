@@ -34,6 +34,17 @@ namespace OrganizationServices
 
                 await _Unit.AssignmentGrades.AddAsync(assignmentsGrades);
 
+                var assignmentSub = await _Unit.AssignmentSubmission.GetByIdAsync(dto.AssignmentSubmissionId);
+
+                if (assignmentSub == null)
+                {
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The Id: {dto.AssignmentSubmissionId} provided is null");
+                }
+
+                assignmentSub.IsCompleted = true;
+
+                _Unit.AssignmentSubmission.Update(assignmentSub);
+
                 await _Unit.SaveChangeAsync();
 
                 return true;
@@ -66,6 +77,7 @@ namespace OrganizationServices
 
                 submission.AssignmentSubmissionId = Guid.NewGuid();
                 submission.SubmissionDate = DateTime.Now;
+                submission.IsCompleted = false;
 
                 await _Unit.AssignmentSubmission.AddAsync(submission);
 
@@ -125,6 +137,53 @@ namespace OrganizationServices
                 var assignments = await _Unit.Assignments.GetAllTeacherAssignmentCreatedAsync(teacherId);
 
                 return _Mapper.Map<IEnumerable<AssignmentDto>>(assignments);    
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<StudentAssignmentSubmittedDto>> GetAllSubmittedAssignmentsAsync(Guid teacherId)
+        {
+            try
+            {
+                var assignmentLists = new List<StudentAssignmentSubmittedDto>();
+
+                var teacher = await _Unit.Teacher.GetByIdAsync(teacherId);
+
+                if (teacher == null)
+                {
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"The teacher Id: {teacherId} provided was not found");
+                }
+
+                var allAssignments = await _Unit.AssignmentSubmission.GetAllSubmittedAssignmentByTeacherIdAsync(teacherId);
+
+                if (allAssignments == null)
+                {
+                    throw new OrganizationCore.Exceptions.InvalidOperationException($"No assignments found for teacher with Id:{teacherId}");
+                }
+
+                foreach (var assignment in allAssignments)
+                {
+                    var subAssignment = await _Unit.AssignmentSubmission.GetTeacherAssignmentsAsync(assignment.AssignmentId);
+
+                    var dto = new StudentAssignmentSubmittedDto
+                    {
+                        AssignmentDescription = assignment.Assignment!.AssignmentDescription,
+                        AssignmentTitle = assignment.Assignment.AssignmentTitle,
+                        AssignmentId = subAssignment!.AssignmentId,
+                        StudentId = subAssignment!.StudentId,
+                        StreamName = assignment.Assignment.GradeStream!.StreamName,
+                        StudentFullNames = $"{subAssignment.Student!.FirstName} {subAssignment.Student.LastName}",
+                        StudentEmail = subAssignment.Student.StudentEmail,
+                        Subject = assignment.Assignment.AssignmentSubject
+                    };
+
+                    assignmentLists.Add(dto);
+                }
+
+                return assignmentLists;
             }
             catch
             {

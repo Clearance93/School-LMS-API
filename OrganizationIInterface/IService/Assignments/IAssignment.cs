@@ -11,5 +11,7 @@ namespace OrganizationIInterface.IService.Assignments
         Task<bool> AssignmentsSubmissionAsync(AssignmentSubmissionDto dto);
 
         Task<IEnumerable<AssignmentDto>> GetAllAssignmentsCreatedByTeacherAsync(Guid teacherId);
+
+        Task<IEnumerable<StudentAssignmentSubmittedDto>> GetAllSubmittedAssignmentsAsync(Guid teacherId);
     }
 }

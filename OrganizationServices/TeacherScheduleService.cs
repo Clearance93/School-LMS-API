@@ -182,9 +182,27 @@ namespace OrganizationServices
 
         public async Task<IEnumerable<TeachingClassDto>> GetAllTeachingClassAsync(Guid organizationId, Guid teacherId)
         {
+            var mappedTeachingClasses = new List<TeachingClassDto>();
+
             var allTeachingClasses = await _Unit.TeachingClass.GetAllTeachingClassesAsync(organizationId, teacherId);
 
-            return _Mapper.Map<IEnumerable<TeachingClassDto>>(allTeachingClasses);
+            foreach (var teachingClass in allTeachingClasses)
+            {
+                var dto = new TeachingClassDto
+                {
+                    TeachingClassId = teachingClass.TeachingClassId,
+                    GradeStreamId = teachingClass.GradeStreamId,
+                    Subject = teachingClass.Subject,
+                    TotalStudents = teachingClass.TotalStudents,
+                    ClassRoomNumber = teachingClass.ClassRoomNumber,
+                    GradeStreamName = teachingClass.GradeStream.StreamName,
+                    OrganizationId = teachingClass.OrganizationId,
+                    TeacherId = teachingClass.TeacherId,
+                };
+                
+                mappedTeachingClasses.Add(dto);
+            }
+            return mappedTeachingClasses;
         }
 
         public async Task<IEnumerable<GradeWithStreamDto>> GetGradeStreamByTeacgerIdAsync(Guid teacherId)

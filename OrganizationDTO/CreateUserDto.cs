@@ -22,7 +22,7 @@ namespace OrganizationDTO
         public string? Role { get; set; }
 
         [Required]
-        public IFormFile? ProfileImage { get; set; }
+        public string? ProfileImage { get; set; }
 
         public DateTime CreatedAt { get; set; }
     }
