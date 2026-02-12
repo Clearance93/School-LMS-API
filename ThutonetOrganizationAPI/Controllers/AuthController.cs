@@ -23,7 +23,7 @@ namespace ThutonetOrganizationAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser([FromForm] CreateUserDto dto)
+        public async Task<IActionResult> RegisterUser([FromBody] CreateUserDto dto)
         {
             try
             {

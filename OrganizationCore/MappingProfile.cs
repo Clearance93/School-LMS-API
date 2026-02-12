@@ -182,9 +182,6 @@ namespace OrganizationCore
 
             CreateMap<SchoolSubjects, SchoolSubjectDto>().ReverseMap();
 
-            CreateMap<SchoolSubjects, SchoolSubjectDto>()
-                .ForMember(dest => dest.CourseStreamId, opt => opt.Ignore()).ReverseMap();
-
             CreateMap<ExamGradeScale, ExamGradeScaleDto>().ReverseMap();
 
             CreateMap<ExamGradeScaleDto, ExamGradeScale>()
@@ -289,6 +286,16 @@ namespace OrganizationCore
             CreateMap<LeadershipProgram, LeadershipProgramDto>()
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ReverseMap();
+
+            CreateMap<StudentsGrade, StudentGradeDto>().ReverseMap();
+
+            CreateMap<StudentsGrade, StudentGradeDto>()
+                .ForMember(dest => dest.SubjectAddedAt, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<AcademicProgress, AcademicProgressDto>().ReverseMap();
+
+            CreateMap<StudentAttendanceOverview, StudentAttendanceOverViewDto>().ReverseMap();
         }
     }
 }

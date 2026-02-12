@@ -20,6 +20,12 @@ namespace OrganizationModels.Model
 
         public string? Gender { get; set; }
 
+        public string? StudentAddress { get; set; }
+
+        public string? StudentEmergencyContact { get; set; }
+
+        public string? StudentContactNumber { get; set; }
+
         public bool? IsDeleted { get; set; }
 
         public bool? IsActive { get; set; }

@@ -4,7 +4,7 @@
     {
         public Guid AssignmentId { get; set; }
 
-        public Guid OrganizationId { get; set; }
+        public Guid OrganizationId { get; set; } public string Name { get; set; }
 
         public Guid TeacherId { get; set; }
 

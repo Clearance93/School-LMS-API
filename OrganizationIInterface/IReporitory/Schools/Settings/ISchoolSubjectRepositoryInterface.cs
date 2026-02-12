@@ -4,6 +4,6 @@ namespace OrganizationIInterface.IReporitory.Schools.Settings
 {
     public interface ISchoolSubjectRepositoryInterface : IGenericRepository<SchoolSubjects>
     {
-        Task<SchoolSubjects?> GetSubjectBySubjectNameAsyc(string subjectName);
+        Task<SchoolSubjects?> GetSubjectBySubjectNameAsyc(Guid gradeId, string subjectName);
     }
 }

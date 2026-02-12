@@ -2,6 +2,7 @@
 using OrganizationData;
 using OrganizationIInterface.IReporitory;
 using OrganizationModels.Model;
+using OrganizationModels.Model.Settings;
 
 namespace OrganizationRepository
 {
@@ -17,7 +18,14 @@ namespace OrganizationRepository
         {
             return await _Context.TeachingClass.Where(t => t.OrganizationId == organizationId &&
                                                            t.TeacherId == teacherId)
+                                                .Include(t => t.GradeStream)
                                                 .ToListAsync();
+        }
+
+        public async Task<TeachingClass?> GetProperTeachingDataAsync(Guid teacherId, Guid streamId)
+        {
+            return await _Context.TeachingClass.FirstOrDefaultAsync(t => t.TeacherId == teacherId &&
+                                                                         t.GradeStreamId == streamId);
         }
 
         public async Task<TeachingClass?> GetTeachingClassByGradeStreamIdAsync(Guid id)

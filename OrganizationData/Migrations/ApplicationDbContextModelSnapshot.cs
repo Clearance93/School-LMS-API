@@ -253,6 +253,38 @@ namespace OrganizationData.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("OrganizationModels.Model.AcademicProgress", b =>
+                {
+                    b.Property<Guid>("AcademicProgressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsCurrentTerm")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("OverallPerfomance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Percentage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SchoolTerm")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AcademicProgressId");
+
+                    b.ToTable("AcademicProgress");
+                });
+
             modelBuilder.Entity("OrganizationModels.Model.Activities", b =>
                 {
                     b.Property<Guid>("ActivityId")
@@ -366,6 +398,8 @@ namespace OrganizationData.Migrations
 
                     b.HasKey("AssignmentId");
 
+                    b.HasIndex("GradeStreamId");
+
                     b.ToTable("Assignments");
                 });
 
@@ -383,6 +417,18 @@ namespace OrganizationData.Migrations
 
                     b.Property<int>("Marks")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("AssignmentGradesId");
 
@@ -402,6 +448,15 @@ namespace OrganizationData.Migrations
 
                     b.Property<string>("AssignmentPdfSubmission")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPending")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSubmitted")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
@@ -1127,18 +1182,18 @@ namespace OrganizationData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CourseStreamId")
+                    b.Property<Guid>("GradeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("GradeLevel")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SubjectName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SubjectId");
 
-                    b.HasIndex("CourseStreamId");
+                    b.HasIndex("GradeId");
 
                     b.ToTable("SchoolSubjects");
                 });
@@ -1171,6 +1226,35 @@ namespace OrganizationData.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("StudentAttendances");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.StudentAttendanceOverview", b =>
+                {
+                    b.Property<Guid>("StudentAttendanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AbsentCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LateCount")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PresentCount")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TermAttendanceOverview")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentAttendanceId");
+
+                    b.ToTable("StudentAttendanceOverview");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.Students", b =>
@@ -1206,7 +1290,16 @@ namespace OrganizationData.Migrations
                     b.Property<Guid?>("OrganizationSetupId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("StudentAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentContactNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("StudentEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentEmergencyContact")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentProfilePicture")
@@ -1222,6 +1315,53 @@ namespace OrganizationData.Migrations
                     b.HasIndex("OrganizationSetupId");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.StudentsGrade", b =>
+                {
+                    b.Property<Guid>("StudentGradeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StreamGradeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StreamName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StudentLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SubjectAddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TeacherFirstNames")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TeacherLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentGradeId");
+
+                    b.ToTable("StudentsGrade");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.StuffMembers", b =>
@@ -1265,6 +1405,53 @@ namespace OrganizationData.Migrations
                     b.HasIndex("OrganizationSetupId");
 
                     b.ToTable("StuffMembers");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.TaskSubmission", b =>
+                {
+                    b.Property<Guid>("TaskSumbissionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("DueDate")
+                        .HasColumnType("date");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSubmitted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Marks")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PdfAttachment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubmissionTaskStatus")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("TaskSumbissionId");
+
+                    b.ToTable("TaskSubmission");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.Teachers", b =>
@@ -1407,6 +1594,17 @@ namespace OrganizationData.Migrations
                         .IsRequired();
 
                     b.Navigation("OrganizationSetup");
+                });
+
+            modelBuilder.Entity("OrganizationModels.Model.Assignment", b =>
+                {
+                    b.HasOne("OrganizationModels.Model.Settings.GradeStream", "GradeStream")
+                        .WithMany()
+                        .HasForeignKey("GradeStreamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GradeStream");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.AssignmentGrades", b =>
@@ -1587,13 +1785,13 @@ namespace OrganizationData.Migrations
 
             modelBuilder.Entity("OrganizationModels.Model.Settings.SchoolSubjects", b =>
                 {
-                    b.HasOne("OrganizationModels.Model.Settings.CourseStreams", "CourseStream")
+                    b.HasOne("OrganizationModels.Model.Settings.Grade", "Grade")
                         .WithMany()
-                        .HasForeignKey("CourseStreamId")
+                        .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CourseStream");
+                    b.Navigation("Grade");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.StudentAttendance", b =>

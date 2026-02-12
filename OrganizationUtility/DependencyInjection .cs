@@ -134,6 +134,13 @@ namespace OrganizationUtility
             services.AddScoped<ILeadershipPropgramRepositoryInterface, LeadershipProgramRepository>();
             services.AddScoped<ILeadershipPropgramServirceInterface, LeadershipProgramsService>();
 
+            services.AddScoped<IStudentSubjectRepositoryInterface, StudentSubjectRepository>();
+            services.AddScoped<IStudentScheduledTimetableRepositoryInterface, StudentScheduledTimetableRepository>();
+            services.AddScoped<IAcademicProgressRepositoryInterface, AcademicProgressRepository>();
+            services.AddScoped<IStudentAttendanceOverviewRepositoryInterface, StudentAttendanceOverviewRepository>();
+
+            services.AddScoped<IStudentDashboardRepositoryInterface, StudentDashboardRepository>();
+
             return services;
         }
     }

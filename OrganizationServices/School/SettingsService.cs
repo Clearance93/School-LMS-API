@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using OrganizationCore.UnitOfWork;
+using OrganizationDTO.Dto;
 using OrganizationDTO.Dto.Settings;
 using OrganizationIInterface.IService.School;
 using OrganizationModels.Model.Settings;
@@ -43,12 +44,21 @@ namespace OrganizationServices.School
 
                 var grade = _Mapper.Map<Grade>(dto);
 
-                grade.GradeId = dto.GradeId;
-                grade.OrganizationId = organizationId;
-                grade.CreatedAt = DateTime.Now;
-                grade.UpdatedAt = DateTime.Now;
+                var orgGrades = await _Unit.Grade.GetOrganizationGrade(dto.GradeName!);
 
-                await _Unit.Grade.AddAsync(grade);
+                if (orgGrades != null)
+                {
+                    grade.GradeId = orgGrades.GradeId;
+                }
+                else
+                {
+                    grade.GradeId = dto.GradeId;
+                    grade.OrganizationId = organizationId;
+                    grade.CreatedAt = DateTime.Now;
+                    grade.UpdatedAt = DateTime.Now;
+
+                    await _Unit.Grade.AddAsync(grade);
+                }
 
                 var streamData = _Mapper.Map<GradeStream>(dto);
 
@@ -74,6 +84,20 @@ namespace OrganizationServices.School
             {
                 throw new Exception($"Failed to add new grade or stream: {ex}");
             }
+        }
+
+        public async Task<IEnumerable<GradeDto>> GetAllGradesByOrganization(Guid organizationId)
+        {
+            var allGrades = await _Unit.Grade.GetAllGradesByOrganization(organizationId);
+
+            return _Mapper.Map<IEnumerable<GradeDto>>(allGrades);
+        }
+
+        public async Task<IEnumerable<GradeStreamTeachingClassDto>> GetAllGradeStreamsBasedOnGradeAsync(Guid gradeId)
+        {
+            var allGradeStreams = await _Unit.GradeStream.GetAllStreamGradesByGradeIdAsync(gradeId);
+
+            return _Mapper.Map<IEnumerable<GradeStreamTeachingClassDto>>(allGradeStreams);
         }
 
         public async Task<IEnumerable<StreamGradeDto>> GetAllStreamByOrganizationId(Guid id)

@@ -4,10 +4,12 @@
     {
         public Guid SubjectId { get; set; }
 
-        public Guid CourseStreamId { get; set; }
-
         public string? SubjectName { get; set; }
 
         public string? GradeLevel { get; set; }
+
+        public Guid GradeId { get; set; }
+
+        public Guid OrganizationId { get; set; }
     }
 }

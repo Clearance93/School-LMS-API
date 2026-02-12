@@ -78,6 +78,36 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("getAllGrades/{organizationId}")]
+        public async Task<IActionResult> GetAllOrganizationalGrades(Guid organizationId)
+        {
+            try
+            {
+                var orgGrades = await _Setting.GetAllGradesByOrganization(organizationId);
+
+                return Ok(orgGrades);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        [HttpGet("getAllStreamGrades/{gradeId}")]
+        public async Task<IActionResult> GetAllGradeStreamByGradeId(Guid gradeId)
+        {
+            try
+            {
+                var allStreams = await _Setting.GetAllGradeStreamsBasedOnGradeAsync(gradeId);
+
+                return Ok(allStreams);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
         [HttpGet("getAllStreams/{organizationId}")]
         public async Task<IActionResult> GettingAlStreams(Guid organizationId)
         {
@@ -104,7 +134,7 @@ namespace ThutonetOrganizationAPI.Controllers
             }
             catch (Exception exception)
             {
-                throw new Exception(exception.Message);
+                throw new Exception(exception.Message, exception);
             }
         }
 

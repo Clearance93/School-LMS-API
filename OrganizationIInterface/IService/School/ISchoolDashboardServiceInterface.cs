@@ -9,6 +9,8 @@ namespace OrganizationIInterface.IService.School
 
         Task<TeacherDashboardViewDto?> GetTeacherDashboardViewAsync(Guid organizationId, Guid teacherId);
 
+        Task<IEnumerable<StudentDashboardDto>> GetStudentDashboardServiceAsync(Guid studentId);
+
         Task<bool> AddNewMessageCommunicationAsync(CreateMessageDto dto);
 
         Task<bool> AddNewBroadCastMessageAsync(BroadcastMessageDto dto);

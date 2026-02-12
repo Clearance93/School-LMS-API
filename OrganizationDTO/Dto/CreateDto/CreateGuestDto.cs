@@ -12,7 +12,7 @@ namespace OrganizationDTO.Dto.CreateDto
 
         public string? GuestEmail { get; set; }
 
-        public IFormFile? GuestProfilePicture { get; set; }
+        public string? GuestProfilePicture { get; set; }
 
         public string? Password { get; set; }
 

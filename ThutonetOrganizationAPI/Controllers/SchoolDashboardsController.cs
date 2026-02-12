@@ -50,6 +50,21 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("studentDashboard/{studentId}")]
+        public async Task<IActionResult> GetStudentDashboard(Guid studentId)
+        {
+            try
+            {
+                var student = await _School.GetStudentDashboardServiceAsync(studentId);
+
+                return Ok(student);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
+            }
+        }
+
         [HttpPost("generatingLinks")]
         public async Task<IActionResult> RegistrationLinkGeneration(GeneretingRegistrationLinkDto dto)
         {
