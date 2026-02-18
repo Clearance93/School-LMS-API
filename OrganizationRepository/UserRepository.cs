@@ -37,6 +37,20 @@ namespace OrganizationRepository
                                                                           !user.IsDeleted); 
         }
 
+        public async Task<string?> GetUserRoleByUserIdAsync(string email)
+        {
+            var user = await _Context.ApplicationUsers.FirstOrDefaultAsync(a => a.Email == email);
+
+            var userRole = await _Context.UserRoles.Where(u => u.UserId == user.Id)
+                                                   .Join(_Context.Roles,
+                                                            u => u.RoleId,
+                                                            r => r.Id,
+                                                            (u, r) => r.Name)
+                                                   .FirstOrDefaultAsync();
+
+            return userRole;
+        }
+
         public async Task<string?> GetUserRoles(string role)
         {
             return await _Context.Roles.Where(r => r.Name == role)

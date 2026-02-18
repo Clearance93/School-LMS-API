@@ -89,6 +89,8 @@ namespace OrganizationCore.UnitOfWork
 
         public IStudentDashboardRepositoryInterface StudentDashboard { get; private set; }
 
+        public IBackToBackCommunicationRepositoryInterface BackToBackCommunication {  get; private set; }
+
         public UnitOfWork(ApplicationDbContext context, 
                           IUSerRepositoryInterface user,
                           IOrganizationRepositoryInterface organization,
@@ -129,7 +131,8 @@ namespace OrganizationCore.UnitOfWork
                           IStudentScheduledTimetableRepositoryInterface studentScheduledTimetable,
                           IStudentAttendanceOverviewRepositoryInterface studentAttendanceOverview,
                           IAcademicProgressRepositoryInterface academicProgress,
-                          IStudentDashboardRepositoryInterface studentDashboard)
+                          IStudentDashboardRepositoryInterface studentDashboard,
+                          IBackToBackCommunicationRepositoryInterface backToBackCommunication)
         {
             _Context = context;
             Users = user ?? throw new ArgumentNullException(nameof(user));
@@ -172,6 +175,7 @@ namespace OrganizationCore.UnitOfWork
             AcademicProgress = academicProgress ?? throw new ArgumentNullException(nameof(academicProgress));
             StudentAttendanceOverview = studentAttendanceOverview ?? throw new ArgumentNullException(nameof(studentAttendanceOverview));
             StudentDashboard = studentDashboard ?? throw new ArgumentNullException(nameof(studentDashboard));
+            BackToBackCommunication = backToBackCommunication ?? throw new ArgumentNullException(nameof(backToBackCommunication));
         }
 
         public void Dispose()

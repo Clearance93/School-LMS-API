@@ -12,7 +12,7 @@
 
         public Guid OrganizationId { get; set; }
 
-        public Guid TeachingClassid { get; set; }
+        public Guid TeachingClassId { get; set; }
 
         public string? ClassName { get; set; }
 

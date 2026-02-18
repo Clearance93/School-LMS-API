@@ -4,6 +4,6 @@ namespace OrganizationIInterface.IReporitory.Schools
 {
     public interface ITeacherDashboardViewRepositoryInterface
     {
-        Task<TeacherDashboardViewDto?> GetTeacherDashboardAsync(Guid organizationId, Guid teacherId);
+        Task<IEnumerable<TeacherDashboardViewDto>> GetTeacherDashboardAsync(Guid organizationId, Guid teacherId);
     }
 }

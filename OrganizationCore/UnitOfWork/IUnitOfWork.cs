@@ -87,6 +87,8 @@ namespace OrganizationCore.UnitOfWork
 
         IStudentDashboardRepositoryInterface StudentDashboard { get; }
 
+        IBackToBackCommunicationRepositoryInterface BackToBackCommunication { get; }
+
         Task<int> SaveChangeAsync();
     }
 }

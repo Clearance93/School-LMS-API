@@ -22,5 +22,7 @@ namespace OrganizationIInterface.IService
         Task<bool> UpdateStudentAttenceDto(Guid id, StudentAttendanceDto dto);
 
         Task RebuildDailyAttendanceOverViewAsync(Guid organizationId, Guid teacherId, DateTime date);
+
+        Task<IEnumerable<TeacherSubjectGradeDto>> GetAllTeacherSubjectGradesAsync(Guid teacherId);
     }
 }

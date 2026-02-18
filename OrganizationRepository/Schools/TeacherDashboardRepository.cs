@@ -15,7 +15,7 @@ namespace OrganizationRepository.Schools
             _Configuration = configuration;
         }
 
-        public async Task<TeacherDashboardViewDto?> GetTeacherDashboardAsync(Guid organizationId, Guid teacherId)
+        public async Task<IEnumerable<TeacherDashboardViewDto>> GetTeacherDashboardAsync(Guid organizationId, Guid teacherId)
         {
             using var connection = new SqlConnection(_Configuration.GetConnectionString("ConnectionString"));
 
@@ -23,7 +23,7 @@ namespace OrganizationRepository.Schools
                           WHERE OrganizationId = @orgId 
                           AND TeacherId = @teachId";
 
-            var depperRequest = await connection.QueryFirstOrDefaultAsync<TeacherDashboardViewDto>(query, new {orgId = organizationId,
+            var depperRequest = await connection.QueryAsync<TeacherDashboardViewDto>(query, new {orgId = organizationId,
                                                                                                                teachId = teacherId });
 
             return depperRequest;

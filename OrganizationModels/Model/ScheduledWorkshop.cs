@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OrganizationModels.Model.Settings;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrganizationModels.Model
 {
@@ -8,6 +9,8 @@ namespace OrganizationModels.Model
         public Guid ScheduledWorkshopId {  get; set; }
 
         public Guid OrganizationId { get; set; }
+
+        public Guid? GradeStreamId { get; set; }
 
         public Guid? TeacherId { get; set; }
 
@@ -40,5 +43,7 @@ namespace OrganizationModels.Model
         public DateTime DeletedAt { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public string? Role { get; set; }
     }
 }

@@ -180,6 +180,28 @@ namespace OrganizationServices
             return _Mapper.Map<IEnumerable<StudentAttendanceDto>>(allStudentAttendance);
         }
 
+        public async Task<IEnumerable<TeacherSubjectGradeDto>> GetAllTeacherSubjectGradesAsync(Guid teacherId)
+        {
+            var subGrade = new List<TeacherSubjectGradeDto>();
+
+            var teacherSubjects = await _Unit.TeachingClass.GetTeacherSubjectByGradeAsync(teacherId);
+
+            foreach (var teacherSubject in teacherSubjects)
+            {
+                var dto = new TeacherSubjectGradeDto
+                {
+                    SubjectName = teacherSubject.Subject,
+                    StreamGradeName = teacherSubject.GradeStream.StreamName,
+                    TeacherId = teacherSubject.TeacherId,
+                    GradeStreamId = teacherSubject.GradeStreamId
+                };
+
+                subGrade.Add(dto);
+            };
+
+            return subGrade;
+        }
+
         public async Task<IEnumerable<TeachingClassDto>> GetAllTeachingClassAsync(Guid organizationId, Guid teacherId)
         {
             var mappedTeachingClasses = new List<TeachingClassDto>();

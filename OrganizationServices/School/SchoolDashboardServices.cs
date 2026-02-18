@@ -50,12 +50,17 @@ namespace OrganizationServices.School
 
                 var broadcastMessage = _Mapper.Map<Message>(dto);
 
+                var userRole = await _Unit.Users.GetUserRoleByUserIdAsync(dto.SenderEmail!);
+
                 broadcastMessage.MessageId = Guid.NewGuid();
                 broadcastMessage.IsRead = false;
                 broadcastMessage.IsDeleted = false;
                 broadcastMessage.TimeStamp = DateTime.Now;
                 broadcastMessage.SenderName = senderInfo.FullName;
                 broadcastMessage.SenderId = senderInfo.UserId;
+                broadcastMessage.SenderRole = userRole;
+                broadcastMessage.RecipientRole = dto.Role;
+                broadcastMessage.IsBrodacast = true;
 
                 await _Unit.Communication.AddAsync(broadcastMessage);
 
@@ -87,6 +92,8 @@ namespace OrganizationServices.School
                 var recipientInfo = await GetUserInfoByRoleAsync(dto.RecipientRole!, dto.RecipientId);
                 var senderInfo = await GetUserInfoByEmailAsync(dto.SenderEmail);
 
+                var userRole = await _Unit.Users.GetUserRoleByUserIdAsync(dto.SenderEmail!);
+
                 var message = _Mapper.Map<Message>(dto);
                 message.MessageId = Guid.NewGuid();
                 message.IsRead = false;
@@ -95,6 +102,8 @@ namespace OrganizationServices.School
                 message.RecipientName = recipientInfo.FullName;
                 message.SenderName = senderInfo.FullName;
                 message.SenderId = senderInfo.UserId;
+                message.SenderRole = userRole;
+                message.IsBrodacast = false;
 
                 await _Unit.Communication.AddAsync(message);
                 await _Unit.SaveChangeAsync();
@@ -176,7 +185,9 @@ namespace OrganizationServices.School
         private async Task<UserInfo> GetUserInfoByEmailAsync(string? email)
         {
             if (string.IsNullOrEmpty(email))
+            {
                 return new UserInfo { UserId = Guid.Empty, FullName = string.Empty };
+            }
 
             var student = await _Unit.Student.GetStudentByEmailAsync(email);
             if (student != null)
@@ -263,7 +274,7 @@ namespace OrganizationServices.School
             }
         }
 
-        public async Task<TeacherDashboardViewDto?> GetTeacherDashboardViewAsync(Guid organizationId, Guid teacherId)
+        public async Task<IEnumerable<TeacherDashboardViewDto>> GetTeacherDashboardViewAsync(Guid organizationId, Guid teacherId)
         {
             return await _Unit.TeacherDashboard.GetTeacherDashboardAsync(organizationId, teacherId);
         }
@@ -296,6 +307,20 @@ namespace OrganizationServices.School
             var results = Regex.Replace(input, @"\s?[A-Za-z]$", "");
 
             return results;
+        }
+
+        public async Task<IEnumerable<MessagesDto>> PullAllMessageSendToReciepentServiceAsync(Guid reciepentId)
+        {
+            var messages = await _Unit.Communication.PullAllMessageSendToReciepentAsync(reciepentId);
+
+            return _Mapper.Map<IEnumerable<MessagesDto>>(messages);
+        }
+
+        public async Task<IEnumerable<MessagesDto>> PullAllBrodacastMessageByRoleServiceAsync(string reciepientRole)
+        {
+            var messages = await _Unit.Communication.PullAllBrodacastMessageByRoleAsync(reciepientRole);
+
+            return _Mapper.Map<IEnumerable<MessagesDto>>(messages);
         }
     }
 }
