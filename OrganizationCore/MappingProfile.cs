@@ -296,6 +296,8 @@ namespace OrganizationCore
             CreateMap<AcademicProgress, AcademicProgressDto>().ReverseMap();
 
             CreateMap<StudentAttendanceOverview, StudentAttendanceOverViewDto>().ReverseMap();
+
+            CreateMap<BackToBackCommunication, BackToBackCommunicationDto>().ReverseMap();
         }
     }
 }

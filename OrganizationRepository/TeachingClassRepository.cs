@@ -22,10 +22,24 @@ namespace OrganizationRepository
                                                 .ToListAsync();
         }
 
+        public async Task<TeachingClass?> GetGradeByGradeStreamIdAsync(string subject)
+        {
+            return await _Context.TeachingClass.FirstOrDefaultAsync(t => t.Subject == subject);
+        }
+
         public async Task<TeachingClass?> GetProperTeachingDataAsync(Guid teacherId, Guid streamId)
         {
             return await _Context.TeachingClass.FirstOrDefaultAsync(t => t.TeacherId == teacherId &&
                                                                          t.GradeStreamId == streamId);
+        }
+
+        public async Task<IEnumerable<TeachingClass>> GetTeacherSubjectByGradeAsync(Guid teacherId)
+        {
+            var teacherSubject = await _Context.TeachingClass.Include(t => t.GradeStream)
+                                                             .Where(t => t.TeacherId == teacherId)
+                                                             .ToListAsync();
+
+            return teacherSubject;
         }
 
         public async Task<TeachingClass?> GetTeachingClassByGradeStreamIdAsync(Guid id)

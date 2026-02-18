@@ -81,5 +81,7 @@ namespace OrganizationData
         public DbSet<AcademicProgress> AcademicProgress {  get; set; }
 
         public DbSet<StudentAttendanceOverview> StudentAttendanceOverview {  get; set; }
+
+        public DbSet<BackToBackCommunication> BackToBackCommunication {  get; set; }
     }
 }

@@ -19,5 +19,18 @@ namespace OrganizationRepository
                                                      m.SenderId == senderId)
                                          .ToListAsync();
         }
+
+        public async Task<IEnumerable<Message>> PullAllBrodacastMessageByRoleAsync(string reciepientRole)
+        {
+            return await _Context.Message.Where(m => m.RecipientRole == reciepientRole && m.IsBrodacast)
+                                         .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Message>> PullAllMessageSendToReciepentAsync(Guid recipientId)
+        {
+            return await _Context.Message.Where(m => m.RecipientId == recipientId ||
+                                                     m.SenderId == recipientId)
+                                         .ToListAsync();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OrganizationModels.Model;
+using OrganizationModels.Model.Settings;
 
 namespace OrganizationIInterface.IReporitory
 {
@@ -9,5 +10,8 @@ namespace OrganizationIInterface.IReporitory
         Task<TeachingClass?> GetTeachingClassByGradeStreamIdAsync(Guid id);
 
         Task<TeachingClass?> GetProperTeachingDataAsync(Guid teacherId, Guid streamId);
+
+        Task<IEnumerable<TeachingClass>> GetTeacherSubjectByGradeAsync(Guid teacherId);
+
     }
 }

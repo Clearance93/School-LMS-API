@@ -4,7 +4,7 @@
     {
         public Guid BroadcastId { get; set; }
 
-        public string Content { get; set; }
+        public string? Content { get; set; }
 
         public string? SenderEmail { get; set; }
 
@@ -15,5 +15,7 @@
         public Guid OrganizationId { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public bool IsBrodacast { get; set; }
     }
 }

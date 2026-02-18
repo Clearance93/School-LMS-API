@@ -33,5 +33,7 @@ namespace OrganizationModels.Model.Communication
         public bool IsModified { get; set; }
 
         public bool IsRead { get; set; }
+
+        public bool IsBrodacast { get; set; }
     }
 }

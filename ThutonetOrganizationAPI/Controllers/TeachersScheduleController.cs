@@ -91,6 +91,21 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("teacherSubjestGrade/{teacherId}")]
+        public async Task<IActionResult> GetAllTeacherSubjectForHisGrades(Guid teacherId)
+        {
+            try
+            {
+                var subTeacher = await _Teacher.GetAllTeacherSubjectGradesAsync(teacherId);
+
+                return Ok(subTeacher);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
         [HttpGet("getAllteachingClasses/{organizationId}/{teacherId}")]
         public async Task<IActionResult> GetAllTeachingClasses(Guid organizationId, Guid teacherId)
         {

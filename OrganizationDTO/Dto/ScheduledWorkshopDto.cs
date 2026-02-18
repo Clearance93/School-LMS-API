@@ -37,5 +37,9 @@
         public DateTime DeletedAt { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public Guid GradeStreamId { get; set; }
+
+        public string? Role { get; set; }
     }
 }

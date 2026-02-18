@@ -12,6 +12,8 @@ namespace OrganizationIInterface.IReporitory
 
         Task<string?> GetUserRoles(string role);
 
+        Task<string?> GetUserRoleByUserIdAsync(string email); 
+
         Task<ApplicationUser?> CheckEmailConfirmationAsync(string userId);
     }
 }

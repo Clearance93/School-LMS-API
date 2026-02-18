@@ -140,6 +140,7 @@ namespace OrganizationUtility
             services.AddScoped<IStudentAttendanceOverviewRepositoryInterface, StudentAttendanceOverviewRepository>();
 
             services.AddScoped<IStudentDashboardRepositoryInterface, StudentDashboardRepository>();
+            services.AddScoped<IBackToBackCommunicationRepositoryInterface, BackToBackCommunicationRepository>();
 
             return services;
         }

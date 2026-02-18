@@ -13,6 +13,12 @@ namespace OrganizationRepository
             _Context = context;
         }
 
+        public async Task<IEnumerable<ScheduledWorkshop>> GetAllMeatingsByRole(string role)
+        {
+            return await _Context.ScheduledWorkshop.Where(s => s.Role == role)
+                                                   .ToListAsync();
+        }
+
         public async Task<IEnumerable<ScheduledWorkshop>> GetAllMeetingsByUserAsync(Guid organizationId, Guid userId)
         {
             var teacher = await _Context.Teachers.FirstOrDefaultAsync(t => t.TeacherId == userId);
@@ -29,6 +35,16 @@ namespace OrganizationRepository
                                                                   s.AdminId == userId)
                                                       .ToListAsync();
             }
+        }
+
+        public async Task<IEnumerable<object>> GetAllOrganizationRolesAsync()
+        {
+            return await _Context.Roles.ToListAsync();
+        }
+
+        public async Task<ScheduledWorkshop?> GetAllStudentUpcomingClassesAsync(Guid streamGradeId)
+        {
+            return await _Context.ScheduledWorkshop.FirstOrDefaultAsync(s => s.GradeStreamId == streamGradeId);
         }
     }
 }

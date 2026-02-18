@@ -50,6 +50,36 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("individualMessages/{reciepientId}")]
+        public async Task<IActionResult> RetrievingIndividualMessages(Guid reciepientId)
+        {
+            try
+            {
+                var messages = await _School.PullAllMessageSendToReciepentServiceAsync(reciepientId);
+
+                return Ok(messages);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
+            }
+        }
+
+        [HttpGet("broadcastsMessages/{userRole}")]
+        public async Task<IActionResult> PullAllBroadcastMessages(string userRole)
+        {
+            try
+            {
+                var broadcast = await _School.PullAllBrodacastMessageByRoleServiceAsync(userRole);
+
+                return Ok(broadcast);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
         [HttpGet("studentDashboard/{studentId}")]
         public async Task<IActionResult> GetStudentDashboard(Guid studentId)
         {

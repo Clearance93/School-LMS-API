@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrganizationData;
 
@@ -11,9 +12,11 @@ using OrganizationData;
 namespace OrganizationData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260217094506_AddingIsBrodacastInTheDatabase")]
+    partial class AddingIsBrodacastInTheDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -571,53 +574,6 @@ namespace OrganizationData.Migrations
                     b.HasIndex("TeachingClassId");
 
                     b.ToTable("ClassSchedules");
-                });
-
-            modelBuilder.Entity("OrganizationModels.Model.Communication.BackToBackCommunication", b =>
-                {
-                    b.Property<Guid>("BackToBackCommunicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateOnly>("DateStamp")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Emojis")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("File")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsBroadcast")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("MessageId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ReceiverId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SenderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeOnly>("TimeStamp")
-                        .HasColumnType("time");
-
-                    b.Property<string>("VoiceNote")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BackToBackCommunicationId");
-
-                    b.ToTable("BackToBackCommunication");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.Communication.Message", b =>

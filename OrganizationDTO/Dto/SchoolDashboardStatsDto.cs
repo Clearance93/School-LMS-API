@@ -30,6 +30,6 @@
 
         public string? AdminProfilePicture { get; set; }
 
-        public bool isSuperAdmin { get; set; }
+        public bool IsSuperAdmin { get; set; }
     }
 }
