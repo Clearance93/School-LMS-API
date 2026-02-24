@@ -35,5 +35,11 @@ namespace OrganizationDTO.Dto
         public bool AssignmentCompleted { get; set; }
 
         public bool AssignmentIsPending { get; set; }
+
+        public bool AssignmentIsSubmitted { get; set; }
+
+        public Guid AssignmentGradesId { get; set; }
+
+        public int AssignmentMarksObtained { get; set; }
     }
 }

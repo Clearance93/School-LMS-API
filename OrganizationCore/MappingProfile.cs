@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using OrganizationDTO;
 using OrganizationDTO.Dto;
+using OrganizationDTO.Dto.AIDto;
 using OrganizationDTO.Dto.Communication;
 using OrganizationDTO.Dto.CreateDto;
 using OrganizationDTO.Dto.Settings;
@@ -298,6 +299,25 @@ namespace OrganizationCore
             CreateMap<StudentAttendanceOverview, StudentAttendanceOverViewDto>().ReverseMap();
 
             CreateMap<BackToBackCommunication, BackToBackCommunicationDto>().ReverseMap();
+
+            CreateMap<AIMarkingRequest, AIMarkingRequestDto>().ReverseMap();
+
+            CreateMap<AIMarkingResponse, AIMarkingResponseDto>().ReverseMap();
+
+            CreateMap<PlagiarismAnalysisResponseDto, PlagiarismResultDto>()
+                .ForMember(dest => dest.AssignmentId, opt => opt.Ignore())
+                .ForMember(dest => dest.StudentId, opt => opt.Ignore())
+                .ForMember(dest => dest.MatchedSources, opt => opt.Ignore())
+                .ForMember(dest => dest.DetectedAt, opt => opt.Ignore());
+
+            CreateMap<PlagiarismResults, PlagiarismResultDto>()
+                .ForMember(dest => dest.MatchedSources, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(dest => dest.MatchedSourceJson, opt => opt.Ignore());
+
+            CreateMap<PreRecordedVideo, PreRecordedVideoDto>()
+                .ForMember(dest => dest.UploadedTime, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

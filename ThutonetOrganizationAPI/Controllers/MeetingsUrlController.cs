@@ -90,6 +90,21 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        //[HttpGet("file/{fileName}")]
+        //public async Task<IActionResult> GetFileMedia(string fileName)
+        //{
+        //    try
+        //    {
+        //        var (fileBytes, contentType, name) = await _ScheduledWorkshop.GetTheMediaFilesAsync(fileName);
+
+        //        return File(fileBytes, contentType, name);
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception (exception.Message, exception);
+        //    }
+        //}
+
         [HttpPost("addToChat")]
         public async Task<IActionResult> AddingChatHistory(BackToBackCommunicationDto dto)
         {

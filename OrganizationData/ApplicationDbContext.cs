@@ -83,5 +83,13 @@ namespace OrganizationData
         public DbSet<StudentAttendanceOverview> StudentAttendanceOverview {  get; set; }
 
         public DbSet<BackToBackCommunication> BackToBackCommunication {  get; set; }
+
+        public DbSet<AIMarkingResponse> AIMarkingResponse {  get; set; }
+
+        public DbSet<AIMarkingRequest> AIMarkingRequest { get; set; }
+
+        public DbSet<PlagiarismResults> PlagiarismResults { get; set; }
+
+        public DbSet<PreRecordedVideo> PreRecordedVideo { get; set; }
     }
 }

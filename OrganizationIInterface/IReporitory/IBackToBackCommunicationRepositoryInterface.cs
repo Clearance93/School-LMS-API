@@ -5,5 +5,7 @@ namespace OrganizationIInterface.IReporitory
     public interface IBackToBackCommunicationRepositoryInterface : IGenericRepository<BackToBackCommunication>
     {
         Task<IEnumerable<BackToBackCommunication>> GetAllChatHistoryByMessageIdAsync(Guid messageId);
+
+        Task<BackToBackCommunication?> GetTheMediaFileByFileNameAsync(string fileName);
     }
 }
