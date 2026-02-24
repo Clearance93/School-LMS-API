@@ -10,6 +10,8 @@
         public Guid StudentId { get; set; }
         public Students? Student { get; set; }
 
+        public Guid TeacherId { get; set; }
+
         public string? AssignmentPdfSubmission {  get; set; }
 
         public DateTime SubmissionDate { get; set; }

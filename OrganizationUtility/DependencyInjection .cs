@@ -15,6 +15,7 @@ using OrganizationIInterface.IService.School;
 using OrganizationIInterface.IService.School.Settings;
 using OrganizationModels.Model;
 using OrganizationRepository;
+using OrganizationRepository.AI;
 using OrganizationRepository.Assignments;
 using OrganizationRepository.Schools;
 using OrganizationRepository.Settings;
@@ -141,6 +142,12 @@ namespace OrganizationUtility
 
             services.AddScoped<IStudentDashboardRepositoryInterface, StudentDashboardRepository>();
             services.AddScoped<IBackToBackCommunicationRepositoryInterface, BackToBackCommunicationRepository>();
+            services.AddScoped<AIMarkingRequestRepositoryInterface, AIMarkingRequestRepository>();
+            services.AddScoped<AIMarkingResponseRepositoryInterface, AIMarkingResponseRepository>();
+            services.AddScoped<IPlagiarismRepositoryInterface, PlagiarismResultsRepository>();
+
+            services.AddScoped<IVideoUploadRepositoryInterface, VideoUploadRepository>();
+            services.AddScoped<IVideoUploadServiceInterface, VideoUploadServices>();
 
             return services;
         }

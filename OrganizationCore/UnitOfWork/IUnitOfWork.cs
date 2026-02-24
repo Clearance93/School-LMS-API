@@ -89,6 +89,14 @@ namespace OrganizationCore.UnitOfWork
 
         IBackToBackCommunicationRepositoryInterface BackToBackCommunication { get; }
 
+        AIMarkingRequestRepositoryInterface MarkingRequest { get; }
+
+        AIMarkingResponseRepositoryInterface MarkingResponse { get; }
+
+        IPlagiarismRepositoryInterface PlagiarimsResults { get; }
+
+        IVideoUploadRepositoryInterface VideoUpload { get; }
+
         Task<int> SaveChangeAsync();
     }
 }

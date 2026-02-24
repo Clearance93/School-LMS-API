@@ -91,6 +91,14 @@ namespace OrganizationCore.UnitOfWork
 
         public IBackToBackCommunicationRepositoryInterface BackToBackCommunication {  get; private set; }
 
+        public AIMarkingRequestRepositoryInterface MarkingRequest { get; private set; }
+
+        public AIMarkingResponseRepositoryInterface MarkingResponse { get; private set; }
+
+        public IPlagiarismRepositoryInterface PlagiarimsResults { get; set; }
+
+        public IVideoUploadRepositoryInterface VideoUpload { get; set; }
+
         public UnitOfWork(ApplicationDbContext context, 
                           IUSerRepositoryInterface user,
                           IOrganizationRepositoryInterface organization,
@@ -132,7 +140,11 @@ namespace OrganizationCore.UnitOfWork
                           IStudentAttendanceOverviewRepositoryInterface studentAttendanceOverview,
                           IAcademicProgressRepositoryInterface academicProgress,
                           IStudentDashboardRepositoryInterface studentDashboard,
-                          IBackToBackCommunicationRepositoryInterface backToBackCommunication)
+                          IBackToBackCommunicationRepositoryInterface backToBackCommunication,
+                          AIMarkingResponseRepositoryInterface markingResponse,
+                          AIMarkingRequestRepositoryInterface markingRequest,
+                          IPlagiarismRepositoryInterface plagiarimsResults,
+                          IVideoUploadRepositoryInterface videoUpload)
         {
             _Context = context;
             Users = user ?? throw new ArgumentNullException(nameof(user));
@@ -176,6 +188,10 @@ namespace OrganizationCore.UnitOfWork
             StudentAttendanceOverview = studentAttendanceOverview ?? throw new ArgumentNullException(nameof(studentAttendanceOverview));
             StudentDashboard = studentDashboard ?? throw new ArgumentNullException(nameof(studentDashboard));
             BackToBackCommunication = backToBackCommunication ?? throw new ArgumentNullException(nameof(backToBackCommunication));
+            MarkingRequest = markingRequest ?? throw new ArgumentNullException(nameof(markingRequest));
+            MarkingResponse = markingResponse ?? throw new ArgumentNullException(nameof(MarkingResponse));
+            PlagiarimsResults = plagiarimsResults ?? throw new ArgumentNullException(nameof(plagiarimsResults));
+            VideoUpload = videoUpload ?? throw new ArgumentNullException(nameof(videoUpload));
         }
 
         public void Dispose()

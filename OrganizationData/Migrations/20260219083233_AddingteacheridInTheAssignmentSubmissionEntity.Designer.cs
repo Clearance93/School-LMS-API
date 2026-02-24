@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrganizationData;
 
@@ -11,9 +12,11 @@ using OrganizationData;
 namespace OrganizationData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260219083233_AddingteacheridInTheAssignmentSubmissionEntity")]
+    partial class AddingteacheridInTheAssignmentSubmissionEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,76 +256,6 @@ namespace OrganizationData.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("OrganizationModels.Model.AIMarkingRequest", b =>
-                {
-                    b.Property<Guid>("MarkingRequestId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AssignmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("StudentAnswers")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TeacherRubric")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MarkingRequestId");
-
-                    b.ToTable("AIMarkingRequest");
-                });
-
-            modelBuilder.Entity("OrganizationModels.Model.AIMarkingResponse", b =>
-                {
-                    b.Property<Guid>("MarkingResponseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AssignmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Clarity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Content")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Feedback")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Grammar")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Improvement")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Strength")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("TotalMarks")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Weakness")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MarkingResponseId");
-
-                    b.ToTable("AIMarkingResponse");
-                });
-
             modelBuilder.Entity("OrganizationModels.Model.AcademicProgress", b =>
                 {
                     b.Property<Guid>("AcademicProgressId")
@@ -465,9 +398,6 @@ namespace OrganizationData.Migrations
 
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TeacherRubricFile")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AssignmentId");
 
@@ -1001,85 +931,6 @@ namespace OrganizationData.Migrations
                     b.HasKey("OrganizationSetupId");
 
                     b.ToTable("OrganizationSetup");
-                });
-
-            modelBuilder.Entity("OrganizationModels.Model.PlagiarismResults", b =>
-                {
-                    b.Property<Guid>("PlagiarismResultsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AIDetectionSummary")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("AIGeneratedPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<Guid>("AssignmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DetectedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("MarkingResponseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("MatchedSourceJson")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("OriginalWorkPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<string>("OverallVerdict")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("PlagiarismPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<string>("PlagiarismSummary")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PlagiarismResultsId");
-
-                    b.ToTable("PlagiarismResults");
-                });
-
-            modelBuilder.Entity("OrganizationModels.Model.PreRecordedVideo", b =>
-                {
-                    b.Property<Guid>("PreRecordedVideoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("GradeStreamId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("StreamName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TeacherFullNames")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UploadedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VideoTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoUpload")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PreRecordedVideoId");
-
-                    b.ToTable("PreRecordedVideo");
                 });
 
             modelBuilder.Entity("OrganizationModels.Model.RegistrrationLink", b =>

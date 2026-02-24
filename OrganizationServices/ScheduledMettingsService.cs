@@ -8,7 +8,6 @@ using OrganizationIInterface.IService;
 using OrganizationModels;
 using OrganizationModels.Model;
 using OrganizationModels.Model.Communication;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -255,5 +254,54 @@ namespace OrganizationServices
                 throw;
             }
         }
+
+        //public Task<(byte[] FileBytes, string ContentType, string FileName)> GetTheMediaFilesAsync(string fileName)
+        //{
+        //    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "upload");
+
+        //    if (!Directory.Exists(uploadPath))
+        //    {
+        //        Directory.CreateDirectory(uploadPath);
+        //    }
+
+        //    var filePath = Path.Combine(uploadPath, fileName);
+
+        //    if (!File.Exists(filePath))
+        //    {
+        //        throw new FileNotFoundException($"File '{fileName}' not found in upload directory");
+        //    }
+
+        //    var fileBytes = File.ReadAllBytes(filePath);
+
+        //    var contentType = GetContentType(fileName);
+
+        //    return Task.FromResult((fileBytes, contentType, fileName));
+        //}
+
+        //private string GetContentType(string fileName)
+        //{
+        //    var ext = Path.GetExtension(fileName).ToLowerInvariant();
+
+        //    return ext switch
+        //    {
+        //        ".pdf" => "application/pdf",
+        //        ".jpg" or ".jpeg" => "image/jpeg",
+        //        ".png" => "image/png",
+        //        ".gif" => "image/gif",
+        //        ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        //        ".doc" => "application/msword",
+        //        ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        //        ".xls" => "application/vnd.ms-excel",
+        //        ".pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        //        ".mp4" => "video/mp4",
+        //        ".webm" => "video/webm",
+        //        ".avi" => "video/x-msvideo",
+        //        ".mov" => "video/quicktime",
+        //        ".mp3" => "audio/mpeg",
+        //        ".wav" => "audio/wav",
+        //        ".ogg" => "audio/ogg",
+        //        _ => "application/octet-stream"
+        //    };
+        //}
     }
 }

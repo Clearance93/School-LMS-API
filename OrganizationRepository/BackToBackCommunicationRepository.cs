@@ -18,5 +18,10 @@ namespace OrganizationRepository
             return await _Context.BackToBackCommunication.Where(b => b.MessageId == messageId)
                                                          .ToListAsync();
         }
+
+        public async Task<BackToBackCommunication?> GetTheMediaFileByFileNameAsync(string fileName)
+        {
+            return await _Context.BackToBackCommunication.FirstOrDefaultAsync(b => b.File == fileName);
+        }
     }
 }

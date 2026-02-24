@@ -31,6 +31,36 @@ namespace ThutonetOrganizationAPI.Controllers
             }
         }
 
+        [HttpGet("submissionAssignment/{assignmentSubmissionId}")]
+        public async Task<IActionResult> GetAllStudentSubmissionAssignment(Guid assignmentSubmissionId)
+        {
+            try
+            {
+                var subSubmission = await _Assignment.GetStudentSubmittedAssignmentByStudentIdAsync(assignmentSubmissionId);
+
+                return Ok(subSubmission);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        [HttpGet("getAllTeacherAssignSubm/{teacherId}")]
+        public async Task<IActionResult> GettingAllAssignmentSubmittedByStudentUsingTeacherId(Guid teacherId)
+        {
+            try
+            {
+                var assignSubm = await _Assignment.GetAllTeacherAssignedSubmittedAssignmentAsync(teacherId);
+
+                return Ok(assignSubm);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
         [HttpGet("getAllTeacherAssignments/{teacherId}")]
         public async Task<IActionResult> TeachersAllAssignments(Guid teacherId)
         {

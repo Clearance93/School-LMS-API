@@ -28,5 +28,7 @@ namespace OrganizationModels.Model
         public DateTime? CreatedDate { get; set; }
 
         public string? AssignmentFile { get; set; }
+
+        public string? TeacherRubricFile { get; set; }
     }
 }
