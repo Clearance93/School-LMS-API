@@ -14,6 +14,7 @@ using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using OrganizationDTO.Dto.CreateDto;
 
 namespace OrganizationServices
 {

@@ -51,11 +51,11 @@ namespace OrganizationUtility
 
             services.AddSingleton<IEmailSender>(provider =>
                 new EmailSender(
-                        smtpServer: configuration["EmailSettings:SmtpServer"],
-                        smtpPort: int.Parse(configuration["EmailSettings:SmtpPort"]),
-                        fromEmail: configuration["EmailSettings:FromEmail"],
-                        smtpUser: configuration["EmailSettings:SmtpUser"],
-                        smtpPass: configuration["EmailSettings:SmtpPass"]
+                        smtpServer: configuration["EmailSettings:Host"],
+                        smtpPort: configuration.GetValue<int>("EmailSettings:Port"),
+                        fromEmail: configuration["EmailSettings:Email"],
+                        smtpUser: configuration["EmailSettings:Email"],
+                        smtpPass: configuration["EmailSettings:Password"]
                     ));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

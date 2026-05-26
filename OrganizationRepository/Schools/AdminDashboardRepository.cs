@@ -19,7 +19,7 @@ namespace OrganizationRepository.Schools
         {
             using var connection = new SqlConnection(_Configuration.GetConnectionString("ConnectionString"));
 
-            var query = @"SELECT * FROM SchoolDashboardStats
+            var query = @"SELECT * FROM vw_SchoolDashboardStats
                           WHERE OrganizationSetupId = @orgId";
 
             var dapperRequest = await connection.QueryFirstOrDefaultAsync<SchoolDashboardStatsDto>(query, new { orgId = id });
