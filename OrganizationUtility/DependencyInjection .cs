@@ -148,6 +148,7 @@ namespace OrganizationUtility
 
             services.AddScoped<IVideoUploadRepositoryInterface, VideoUploadRepository>();
             services.AddScoped<IVideoUploadServiceInterface, VideoUploadServices>();
+            services.AddScoped<IBlobService, BlobService>();
 
             return services;
         }

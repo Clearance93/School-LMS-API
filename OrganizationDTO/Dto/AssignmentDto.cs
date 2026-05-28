@@ -1,4 +1,6 @@
-﻿namespace OrganizationDTO.Dto
+﻿using Microsoft.AspNetCore.Http;
+
+namespace OrganizationDTO.Dto
 {
     public class AssignmentDto
     {
@@ -24,7 +26,12 @@
 
         public DateTime? CreatedDate { get; set; }
 
+        public IFormFile? AssignmentFormFile { get; set; }
+
         public string? AssignmentFile { get; set; }
+
+        public IFormFile? RubricFormFile { get; set; }
+
 
         public string? TeacherRubricFile { get; set; }
     }
