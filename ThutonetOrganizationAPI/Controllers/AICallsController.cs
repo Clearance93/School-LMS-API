@@ -29,7 +29,7 @@ public class AIAssistanceController : ControllerBase
         _Client = client;
         _Configuration = configuration;
         _GroqUrl = configuration["Groq:GroqUrl"];
-        _GroqApiKey = configuration["Groq:GroqAPIKey"];
+        _GroqApiKey = configuration["Groq:GroqApiKey"];
         _Mapper = mapper;
     }
 

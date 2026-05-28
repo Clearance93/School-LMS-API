@@ -17,6 +17,8 @@ namespace OrganizationIInterface.IService.Assignments
 
         Task<AIMarkingRequestDto> GettingAllMarkingRequestByAssignmentId(Guid assignmentId, Guid studentId);
 
+        Task<AssignmentSubmissionDto> SubmittedAssignment(Guid assignmentId);
+
         Task<bool> AssignmentsSubmissionAsync(AssignmentSubmissionDto dto);
 
         Task<IEnumerable<AssignmentDto>> GetAllAssignmentsCreatedByTeacherAsync(Guid teacherId);

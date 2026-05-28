@@ -306,5 +306,12 @@ namespace OrganizationServices
 
             return true;
         }
+
+        public async Task<AssignmentSubmissionDto> SubmittedAssignment(Guid assignmentId)
+        {
+            var subAssignment = await _Unit.AssignmentSubmission.GetTeacherAssignmentsAsync(assignmentId);
+            
+            return _Mapper.Map<AssignmentSubmissionDto>(subAssignment);
+        }
     }
 }
