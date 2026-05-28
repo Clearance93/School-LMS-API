@@ -10,11 +10,17 @@ namespace OrganizationDTO.Dto
 
         public Guid StudentAttendanceId { get; set; }
 
+        public Guid? GradeId { get; set; }
+
+        public string? GradeName { get; set; }
+
         public Guid AttendanceSessionId { get; set; }
 
         public bool IsPresent { get; set; }
 
         public Guid AssignmentId { get; set; }
+
+        public string? AssignmentFile { get; set; }
 
         public string? AssignmentTitle { get; set; }
 

@@ -9,6 +9,7 @@ using OrganizationIInterface.IReporitory.Schools;
 using OrganizationIInterface.IService.School;
 using OrganizationModels.Model;
 using OrganizationModels.Model.Communication;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace OrganizationServices.School
@@ -302,11 +303,25 @@ namespace OrganizationServices.School
 
         private string RegexPatten(string? streamName)
         {
-            var input = streamName ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(streamName))
+            {
+                throw new OrganizationCore.Exceptions.InvalidOperationException("Stream name cannot be null or empty.");
+            }
 
-            var results = Regex.Replace(input, @"\s?[A-Za-z]$", "");
+            var gradeMatch = Regex.Match(streamName, @"\bGrade\s*\d+\b", RegexOptions.IgnoreCase);
+            if (gradeMatch.Success)
+            {
+                return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(gradeMatch.Value.ToLower());
+            }
 
-            return results;
+            var numberMatch = Regex.Match(streamName, @"\b\d+\b");
+
+            if (numberMatch.Success)
+            {
+                return $"Grade {numberMatch.Value}";
+            }
+
+            return string.Empty;
         }
 
         public async Task<IEnumerable<MessagesDto>> PullAllMessageSendToReciepentServiceAsync(Guid reciepentId)
