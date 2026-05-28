@@ -8,8 +8,9 @@ using OrganizationUtility.Sealed;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
+    options.UseSqlServer(connectionString, sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -21,7 +22,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+.AddDefaultTokenProviders();    
 
 SqlMapper.AddTypeHandler(new TimeOnlyTypeHandler());
 SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
@@ -61,6 +62,19 @@ try
     {
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        // Apply any pending migrations to ensure the database exists and schema is up to date.
+        try
+        {
+            logger.LogInformation("Applying pending migrations (if any)...");
+            await db.Database.MigrateAsync();
+            logger.LogInformation("Database migrations applied.");
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "An error occurred while applying database migrations. The DB may not exist or the connection is invalid.");
+        }
 
         logger.LogInformation("Starting role seeding...");
         await RoleSeeder.SeedRolesAsync(roleManager, logger);
