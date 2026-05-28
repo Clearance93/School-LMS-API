@@ -17,13 +17,15 @@ namespace ThutonetOrganizationAPI.Controllers
         private readonly IStuffMemberServiceInterface _StuffMember;
         private readonly IGuestServiceInterface _Guest;
         private readonly ILogger<SchoolController> _Logger;
+        private readonly IBlobService _Blob;
 
         public SchoolController(ITeacherServiceInterface teacher, 
                                 IStudentServiceInterface student, 
                                 ILearnerServiceInterface learner, 
                                 IStuffMemberServiceInterface stuffMember, 
                                 IGuestServiceInterface guest, 
-                                ILogger<SchoolController> logger)
+                                ILogger<SchoolController> logger,
+                                IBlobService blob)
         {
             _Teacher = teacher ?? throw new ArgumentNullException(nameof(teacher));
             _Student = student ?? throw new ArgumentNullException(nameof(student));
@@ -31,6 +33,7 @@ namespace ThutonetOrganizationAPI.Controllers
             _StuffMember = stuffMember ?? throw new ArgumentNullException(nameof(stuffMember));
             _Guest = guest ?? throw new ArgumentNullException(nameof(guest));
             _Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _Blob = blob ?? throw new ArgumentNullException(nameof(blob));
         }
 
         [HttpPost("teacher")]
@@ -49,10 +52,27 @@ namespace ThutonetOrganizationAPI.Controllers
         }
 
         [HttpPost("student")]
-        public async Task<IActionResult> AddNewStudent([FromBody] CreateStudentDto dto)
+        public async Task<IActionResult> AddNewStudent([FromForm] CreateStudentDto dto)
         {
             try
             {
+                if (dto.StudentFormFileProfilePicture != null &
+                    HttpContext.Request.Form.Files.Count > 0)
+                {
+                    var file = HttpContext.Request.Form.Files[0];
+
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+                    var containerName = "studentprofilepictures";
+
+                    using (var stream = file.OpenReadStream())
+                    {
+                        var blobDto = await _Blob.UploadFileTOBlobAsync(file, containerName, fileName);
+
+                        dto.StudentProfilePicture = blobDto.BlobFileUrl;
+                    }
+                }
+
                 var student = await _Student.AddNewStudentAsync(dto);
 
                 return Ok(student);

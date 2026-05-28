@@ -1,4 +1,6 @@
-﻿namespace OrganizationDTO.Dto.CreateDto
+﻿using Microsoft.AspNetCore.Http;
+
+namespace OrganizationDTO.Dto.CreateDto
 {
     public class CreateStudentDto
     {
@@ -9,6 +11,8 @@
         public string? StudentEmail { get; set; }
 
         public Guid RegistrationLinkId { get; set; }
+
+        public IFormFile? StudentFormFileProfilePicture { get; set; }
 
         public string? StudentProfilePicture { get; set; }
 
